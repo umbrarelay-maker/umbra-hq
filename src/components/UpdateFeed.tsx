@@ -24,8 +24,8 @@ const typeStyles: Record<Update['type'], { bg: string; dot: string; label: strin
     label: 'NOTE' 
   },
   milestone: { 
-    bg: 'bg-violet-500/10 text-violet-600 dark:text-violet-400', 
-    dot: 'bg-violet-500',
+    bg: 'bg-pink-500/10 text-pink-600 dark:text-pink-400', 
+    dot: 'bg-pink-500',
     label: 'MILESTONE' 
   },
 };

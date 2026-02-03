@@ -8,7 +8,7 @@ import { Document } from '@/data/initial-data';
 const categoryConfig = {
   audits: { icon: '◈', label: 'Audits', color: 'bg-rose-500/10 text-rose-600 dark:text-rose-400' },
   research: { icon: '◇', label: 'Research', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
-  marketing: { icon: '◆', label: 'Marketing', color: 'bg-violet-500/10 text-violet-600 dark:text-violet-400' },
+  marketing: { icon: '◆', label: 'Marketing', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400' },
   technical: { icon: '◉', label: 'Technical', color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
   other: { icon: '○', label: 'Other', color: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400' },
 };
@@ -51,7 +51,7 @@ function NewDocModal({ onClose, onSave }: NewDocModalProps) {
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Document title..."
               autoFocus
             />
@@ -64,7 +64,7 @@ function NewDocModal({ onClose, onSave }: NewDocModalProps) {
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Brief description..."
             />
           </div>
@@ -75,7 +75,7 @@ function NewDocModal({ onClose, onSave }: NewDocModalProps) {
             <select
               value={category}
               onChange={e => setCategory(e.target.value as Document['category'])}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
             >
               {Object.entries(categoryConfig).map(([key, config]) => (
                 <option key={key} value={key}>{config.label}</option>

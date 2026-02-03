@@ -17,7 +17,7 @@ export default function StatsCard({ label, value, icon, accent, trend }: StatsCa
     }`}>
       {/* Subtle gradient overlay on hover */}
       {!accent && (
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-sky-500/5 via-pink-500/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
       
       <div className="relative flex items-start justify-between">

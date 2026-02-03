@@ -21,7 +21,7 @@ export default function Dashboard() {
       <div className="animate-fade-in">
         <div className="flex items-end justify-between">
           <div>
-            <p className="text-sm font-medium text-indigo-500 dark:text-indigo-400 mb-1">
+            <p className="text-sm font-medium text-sky-500 dark:text-sky-400 mb-1">
               Welcome back
             </p>
             <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white">
@@ -65,7 +65,7 @@ export default function Dashboard() {
               <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Recent Updates</h2>
               <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">Latest activity across all projects</p>
             </div>
-            <a href="/updates" className="text-xs font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1 group">
+            <a href="/updates" className="text-xs font-medium text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors flex items-center gap-1 group">
               View all
               <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </a>
@@ -82,7 +82,7 @@ export default function Dashboard() {
                 <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Active Projects</h2>
                 <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">Your current work</p>
               </div>
-              <a href="/projects" className="text-xs font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1 group">
+              <a href="/projects" className="text-xs font-medium text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors flex items-center gap-1 group">
                 View all
                 <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </a>

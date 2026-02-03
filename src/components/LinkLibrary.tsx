@@ -6,7 +6,7 @@ import { useData } from '@/context/DataContext';
 
 const categoryConfig = {
   site: { icon: '◉', label: 'Sites', color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
-  repo: { icon: '◈', label: 'Repositories', color: 'bg-violet-500/10 text-violet-600 dark:text-violet-400' },
+  repo: { icon: '◈', label: 'Repositories', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400' },
   tool: { icon: '◆', label: 'Tools', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
   docs: { icon: '◇', label: 'Documentation', color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400' },
   resource: { icon: '○', label: 'Resources', color: 'bg-rose-500/10 text-rose-600 dark:text-rose-400' },
@@ -49,7 +49,7 @@ function LinkModal({ link, onClose, onSave }: LinkModalProps) {
               type="text"
               value={label}
               onChange={e => setLabel(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Link name..."
               autoFocus
             />
@@ -62,7 +62,7 @@ function LinkModal({ link, onClose, onSave }: LinkModalProps) {
               type="url"
               value={url}
               onChange={e => setUrl(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="https://..."
             />
           </div>
@@ -73,7 +73,7 @@ function LinkModal({ link, onClose, onSave }: LinkModalProps) {
             <select
               value={category}
               onChange={e => setCategory(e.target.value as QuickLink['category'])}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
             >
               {Object.entries(categoryConfig).map(([key, config]) => (
                 <option key={key} value={key}>{config.label}</option>
@@ -88,7 +88,7 @@ function LinkModal({ link, onClose, onSave }: LinkModalProps) {
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Brief description..."
             />
           </div>
@@ -203,14 +203,14 @@ export default function LinkLibrary() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-5 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-indigo-500/10 hover-lift"
+                  className="group relative p-5 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-sky-500/30 dark:hover:border-sky-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-sky-500/5 dark:hover:shadow-sky-500/10 hover-lift"
                 >
                   {/* Gradient on hover */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-sky-500/5 via-pink-500/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   
                   <div className="relative flex items-start justify-between">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
+                      <p className="text-sm font-semibold text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors truncate">
                         {link.label}
                       </p>
                       {link.description && (

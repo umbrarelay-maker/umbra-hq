@@ -9,7 +9,7 @@ import RichTextEditor from '@/components/RichTextEditor';
 const categoryStyles = {
   audits: { bg: 'bg-rose-500/10 text-rose-600 dark:text-rose-400', icon: '◈' },
   research: { bg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400', icon: '◇' },
-  marketing: { bg: 'bg-violet-500/10 text-violet-600 dark:text-violet-400', icon: '◆' },
+  marketing: { bg: 'bg-pink-500/10 text-pink-600 dark:text-pink-400', icon: '◆' },
   technical: { bg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', icon: '◉' },
   other: { bg: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400', icon: '○' },
 };
@@ -113,14 +113,14 @@ export default function DocumentDetailPage() {
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full text-3xl font-bold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none py-2 text-zinc-900 dark:text-white transition-colors"
+              className="w-full text-3xl font-bold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-2 text-zinc-900 dark:text-white transition-colors"
               placeholder="Document title..."
             />
             <input
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none py-2 transition-colors"
+              className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-2 transition-colors"
               placeholder="Brief description..."
             />
           </div>

@@ -8,7 +8,7 @@ interface QuickLinksProps {
 
 const categoryConfig: Record<QuickLink['category'], { icon: string; label: string; color: string }> = {
   site: { icon: '◎', label: 'Deployed Sites', color: 'text-emerald-500' },
-  repo: { icon: '◉', label: 'Repositories', color: 'text-violet-500' },
+  repo: { icon: '◉', label: 'Repositories', color: 'text-pink-500' },
   tool: { icon: '◇', label: 'Tools', color: 'text-blue-500' },
   docs: { icon: '◆', label: 'Documentation', color: 'text-amber-500' },
   resource: { icon: '○', label: 'Resources', color: 'text-zinc-500' },

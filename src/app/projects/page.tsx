@@ -49,7 +49,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Project name..."
               autoFocus
             />
@@ -62,7 +62,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Brief description..."
             />
           </div>
@@ -74,7 +74,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
               <select
                 value={status}
                 onChange={e => setStatus(e.target.value as Project['status'])}
-                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               >
                 <option value="active">Active</option>
                 <option value="on-hold">On Hold</option>
@@ -89,7 +89,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
                 type="text"
                 value={notes}
                 onChange={e => setNotes(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
                 placeholder="Quick notes..."
               />
             </div>
@@ -102,7 +102,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
               type="url"
               value={githubUrl}
               onChange={e => setGithubUrl(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="https://github.com/..."
             />
           </div>
@@ -114,7 +114,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
               type="url"
               value={vercelUrl}
               onChange={e => setVercelUrl(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="https://..."
             />
           </div>

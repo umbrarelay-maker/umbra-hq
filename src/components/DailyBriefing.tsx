@@ -31,9 +31,9 @@ const moodConfig = {
   shipping: { 
     icon: '🚀', 
     label: 'Shipping', 
-    gradient: 'from-violet-500/10 to-violet-500/5',
-    border: 'border-violet-500/20',
-    badge: 'bg-violet-500/15 text-violet-600 dark:text-violet-400'
+    gradient: 'from-pink-500/10 to-pink-500/5',
+    border: 'border-pink-500/20',
+    badge: 'bg-pink-500/15 text-pink-600 dark:text-pink-400'
   },
 };
 

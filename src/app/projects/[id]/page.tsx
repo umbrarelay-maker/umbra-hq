@@ -134,14 +134,14 @@ export default function ProjectDetailPage() {
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  className="w-full text-3xl font-bold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none py-2 text-zinc-900 dark:text-white transition-colors"
+                  className="w-full text-3xl font-bold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-2 text-zinc-900 dark:text-white transition-colors"
                   placeholder="Project name..."
                 />
                 <input
                   type="text"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
-                  className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none py-2 transition-colors"
+                  className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-2 transition-colors"
                   placeholder="Brief description..."
                 />
               </div>
@@ -164,7 +164,7 @@ export default function ProjectDetailPage() {
               <select
                 value={status}
                 onChange={e => setStatus(e.target.value as typeof status)}
-                className="text-xs font-semibold px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="text-xs font-semibold px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
               >
                 <option value="active">Active</option>
                 <option value="on-hold">On Hold</option>
@@ -194,7 +194,7 @@ export default function ProjectDetailPage() {
                 type="url"
                 value={githubUrl}
                 onChange={e => setGithubUrl(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
                 placeholder="https://github.com/..."
               />
             </div>
@@ -206,7 +206,7 @@ export default function ProjectDetailPage() {
                 type="url"
                 value={vercelUrl}
                 onChange={e => setVercelUrl(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
                 placeholder="https://..."
               />
             </div>
@@ -334,7 +334,7 @@ export default function ProjectDetailPage() {
       {projectTasks.length > 0 && (
         <div className="mb-8">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-white mb-5 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+            <div className="w-8 h-8 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400">
               ◐
             </div>
             Related Tasks
@@ -347,7 +347,7 @@ export default function ProjectDetailPage() {
               <Link
                 key={task.id}
                 href="/tasks"
-                className="group p-4 rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/5"
+                className="group p-4 rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-sky-500/30 dark:hover:border-sky-500/30 transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/5"
               >
                 <div className="flex items-center gap-3 mb-2">
                   <span className={`text-lg ${
@@ -363,7 +363,7 @@ export default function ProjectDetailPage() {
                     {task.priority.toUpperCase()}
                   </span>
                 </div>
-                <p className="text-sm font-medium text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
+                <p className="text-sm font-medium text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors truncate">
                   {task.title}
                 </p>
               </Link>

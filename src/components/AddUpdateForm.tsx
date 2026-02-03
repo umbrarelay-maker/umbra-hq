@@ -31,7 +31,7 @@ export default function AddUpdateForm() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="group w-full p-5 rounded-2xl border-2 border-dashed border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-500 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2"
+        className="group w-full p-5 rounded-2xl border-2 border-dashed border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-500 hover:border-sky-500/30 dark:hover:border-sky-500/30 hover:text-sky-600 dark:hover:text-sky-400 transition-all duration-200 text-sm font-medium flex items-center justify-center gap-2"
       >
         <span className="text-lg transition-transform group-hover:scale-110">+</span>
         Add new update

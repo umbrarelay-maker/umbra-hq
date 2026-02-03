@@ -52,12 +52,12 @@ export default function Sidebar() {
         {/* Logo */}
         <div className="p-6 pb-5">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-pink-500 flex items-center justify-center shadow-lg shadow-sky-500/20">
               <span className="text-white font-bold text-lg">U</span>
             </div>
             <div>
               <h1 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
-                Umbra<span className="text-indigo-500 dark:text-indigo-400">HQ</span>
+                Umbra<span className="text-sky-500 dark:text-sky-400">HQ</span>
               </h1>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-600 font-medium">
                 AI Workspace
@@ -108,7 +108,7 @@ export default function Sidebar() {
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition-colors ${
                       isActive 
                         ? 'bg-white/20 dark:bg-zinc-900/20' 
-                        : 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
+                        : 'bg-sky-500/10 text-sky-600 dark:text-sky-400'
                     }`}>
                       {activeProjects}
                     </span>
@@ -149,7 +149,7 @@ export default function Sidebar() {
               </span>
               <span className="font-medium">{darkMode ? 'Dark Mode' : 'Light Mode'}</span>
             </div>
-            <div className={`w-10 h-6 rounded-full p-0.5 transition-colors ${darkMode ? 'bg-indigo-500' : 'bg-zinc-300'}`}>
+            <div className={`w-10 h-6 rounded-full p-0.5 transition-colors ${darkMode ? 'bg-sky-500' : 'bg-zinc-300'}`}>
               <div className={`w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${darkMode ? 'translate-x-4' : 'translate-x-0'}`} />
             </div>
           </button>
@@ -158,7 +158,7 @@ export default function Sidebar() {
           {user && (
             <div className="mt-3 px-4 py-3 bg-zinc-100/50 dark:bg-zinc-900/50 rounded-xl">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white text-xs font-medium">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-pink-500 flex items-center justify-center text-white text-xs font-medium">
                   {user.email?.charAt(0).toUpperCase() || 'U'}
                 </div>
                 <div className="flex-1 min-w-0">

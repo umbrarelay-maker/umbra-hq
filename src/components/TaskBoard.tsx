@@ -57,7 +57,7 @@ function TaskModal({ task, onClose, onSave, onDelete }: TaskModalProps) {
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               placeholder="Task title..."
               autoFocus
             />
@@ -69,7 +69,7 @@ function TaskModal({ task, onClose, onSave, onDelete }: TaskModalProps) {
             <textarea
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent resize-none transition-all"
               placeholder="Optional description..."
               rows={3}
             />
@@ -82,7 +82,7 @@ function TaskModal({ task, onClose, onSave, onDelete }: TaskModalProps) {
               <select
                 value={priority}
                 onChange={e => setPriority(e.target.value as Task['priority'])}
-                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -96,7 +96,7 @@ function TaskModal({ task, onClose, onSave, onDelete }: TaskModalProps) {
               <select
                 value={status}
                 onChange={e => setStatus(e.target.value as Task['status'])}
-                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               >
                 <option value="todo">To Do</option>
                 <option value="in-progress">In Progress</option>
@@ -111,7 +111,7 @@ function TaskModal({ task, onClose, onSave, onDelete }: TaskModalProps) {
             <select
               value={projectId}
               onChange={e => setProjectId(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
             >
               <option value="">No project</option>
               {projects.map(p => (
@@ -173,11 +173,11 @@ function TaskCard({ task, index, onEdit }: TaskCardProps) {
             priority.border
           } ${priority.bg} ${
             snapshot.isDragging 
-              ? 'shadow-2xl shadow-black/20 scale-[1.02] rotate-1 border-indigo-500/50' 
+              ? 'shadow-2xl shadow-black/20 scale-[1.02] rotate-1 border-sky-500/50' 
               : 'hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/20 hover:border-zinc-300 dark:hover:border-zinc-600'
           }`}
         >
-          <p className="text-sm font-medium text-zinc-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+          <p className="text-sm font-medium text-zinc-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
             {task.title}
           </p>
           {task.description && (
@@ -286,7 +286,7 @@ export default function TaskBoard() {
                       {...provided.droppableProps}
                       className={`space-y-3 min-h-[250px] rounded-xl p-2 -m-2 transition-all duration-200 ${
                         snapshot.isDraggingOver 
-                          ? 'bg-indigo-500/5 ring-2 ring-indigo-500/20 ring-inset' 
+                          ? 'bg-sky-500/5 ring-2 ring-sky-500/20 ring-inset' 
                           : ''
                       }`}
                     >

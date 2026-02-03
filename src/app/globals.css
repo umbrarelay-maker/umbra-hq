@@ -4,15 +4,17 @@
 :root {
   --background: #fafafa;
   --foreground: #18181b;
-  --accent: #6366f1;
-  --accent-subtle: rgba(99, 102, 241, 0.1);
+  --accent: #60A5FA;
+  --accent-secondary: #F472B6;
+  --accent-subtle: rgba(96, 165, 250, 0.1);
 }
 
 .dark {
   --background: #09090b;
   --foreground: #fafafa;
-  --accent: #818cf8;
-  --accent-subtle: rgba(129, 140, 248, 0.1);
+  --accent: #38BDF8;
+  --accent-secondary: #EC4899;
+  --accent-subtle: rgba(56, 189, 248, 0.1);
 }
 
 html {
@@ -124,10 +126,10 @@ body {
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.1);
   }
   50% {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
   }
 }
 
@@ -244,13 +246,13 @@ body {
 }
 
 .card-glow:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.1), 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.1), 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .dark .card-glow:hover {
-  border-color: rgba(129, 140, 248, 0.3);
-  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.1), 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.1), 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* ==================== TIPTAP EDITOR ==================== */
@@ -306,13 +308,13 @@ body {
 }
 
 .ProseMirror mark {
-  background-color: rgba(99, 102, 241, 0.2);
+  background-color: rgba(96, 165, 250, 0.2);
   padding: 0.125rem 0;
   border-radius: 2px;
 }
 
 .dark .ProseMirror mark {
-  background-color: rgba(129, 140, 248, 0.3);
+  background-color: rgba(56, 189, 248, 0.3);
 }
 
 .ProseMirror blockquote {

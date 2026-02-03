@@ -19,9 +19,9 @@ const categoryStyles: Record<Document['category'], { bg: string; icon: string; g
     gradient: 'from-blue-500/20 to-blue-500/5'
   },
   marketing: { 
-    bg: 'bg-violet-500/10 text-violet-600 dark:text-violet-400', 
+    bg: 'bg-pink-500/10 text-pink-600 dark:text-pink-400', 
     icon: '◆',
-    gradient: 'from-violet-500/20 to-violet-500/5'
+    gradient: 'from-pink-500/20 to-pink-500/5'
   },
   technical: { 
     bg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', 
@@ -47,7 +47,7 @@ export default function DocumentCard({ document }: DocumentCardProps) {
   const category = categoryStyles[document.category];
 
   return (
-    <div className="group relative p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-indigo-500/10 hover-lift overflow-hidden">
+    <div className="group relative p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-sky-500/30 dark:hover:border-sky-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-sky-500/5 dark:hover:shadow-sky-500/10 hover-lift overflow-hidden">
       {/* Gradient background on hover */}
       <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
       
@@ -69,7 +69,7 @@ export default function DocumentCard({ document }: DocumentCardProps) {
       {/* Title */}
       <Link 
         href={`/documents/${document.id}`} 
-        className="relative block text-lg font-semibold text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mb-3"
+        className="relative block text-lg font-semibold text-zinc-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors mb-3"
       >
         {document.title}
       </Link>

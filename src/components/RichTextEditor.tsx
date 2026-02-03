@@ -54,7 +54,7 @@ function MenuBar({ editor }: { editor: ReturnType<typeof useEditor> }) {
         className={buttonClass(editor.isActive('highlight'))}
         title="Highlight"
       >
-        <span className="bg-indigo-200 dark:bg-indigo-600 px-1.5 rounded">H</span>
+        <span className="bg-sky-200 dark:bg-sky-600 px-1.5 rounded">H</span>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}

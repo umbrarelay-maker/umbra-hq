@@ -125,7 +125,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         className="w-full text-left px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-150 group"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+                          <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-600 dark:text-sky-400 group-hover:scale-110 transition-transform">
                             ◈
                           </div>
                           <div className="flex-1 min-w-0">
@@ -235,7 +235,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         className="w-full text-left px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-150 group"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-600 dark:text-violet-400 group-hover:scale-110 transition-transform">
+                          <div className="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-600 dark:text-pink-400 group-hover:scale-110 transition-transform">
                             ◆
                           </div>
                           <p className="flex-1 text-sm text-zinc-600 dark:text-zinc-400 truncate">

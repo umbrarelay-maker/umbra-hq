@@ -33,11 +33,11 @@ export default function ProjectCard({ project, compact }: ProjectCardProps) {
     return (
       <Link 
         href={`/projects/${project.id}`}
-        className="group flex items-center justify-between p-4 rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/5 dark:hover:shadow-indigo-500/5"
+        className="group flex items-center justify-between p-4 rounded-xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-sky-500/30 dark:hover:border-sky-500/30 transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/5 dark:hover:shadow-sky-500/5"
       >
         <div className="flex items-center gap-3 min-w-0">
           <div className={`w-2.5 h-2.5 rounded-full ${status.dot} ring-4 ring-opacity-20 ${status.dot.replace('bg-', 'ring-')}`} />
-          <span className="text-sm font-medium text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
+          <span className="text-sm font-medium text-zinc-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors truncate">
             {project.name}
           </span>
         </div>
@@ -54,9 +54,9 @@ export default function ProjectCard({ project, compact }: ProjectCardProps) {
   }
 
   return (
-    <div className="group relative p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-indigo-500/30 dark:hover:border-indigo-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/5 dark:hover:shadow-indigo-500/10 hover-lift">
+    <div className="group relative p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-sky-500/30 dark:hover:border-sky-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-sky-500/5 dark:hover:shadow-sky-500/10 hover-lift">
       {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-sky-500/5 via-pink-500/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       
       {/* Header */}
       <div className="relative flex items-start justify-between mb-4">
@@ -64,7 +64,7 @@ export default function ProjectCard({ project, compact }: ProjectCardProps) {
           <div className={`w-3 h-3 rounded-full ${status.dot} ring-4 ring-opacity-20 ${status.dot.replace('bg-', 'ring-')}`} />
           <Link 
             href={`/projects/${project.id}`} 
-            className="text-base font-semibold text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            className="text-base font-semibold text-zinc-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
           >
             {project.name}
           </Link>
