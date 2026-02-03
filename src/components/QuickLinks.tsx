@@ -10,6 +10,16 @@ const categoryIcons: Record<QuickLink['category'], string> = {
   site: '◎',
   repo: '◉',
   tool: '◇',
+  docs: '◆',
+  resource: '○',
+};
+
+const categoryLabels: Record<QuickLink['category'], string> = {
+  site: 'Deployed Sites',
+  repo: 'Repositories',
+  tool: 'Tools',
+  docs: 'Documentation',
+  resource: 'Resources',
 };
 
 export default function QuickLinks({ links }: QuickLinksProps) {
@@ -19,18 +29,12 @@ export default function QuickLinks({ links }: QuickLinksProps) {
     return acc;
   }, {} as Record<string, QuickLink[]>);
 
-  const categoryLabels: Record<string, string> = {
-    site: 'Deployed Sites',
-    repo: 'Repositories',
-    tool: 'Tools',
-  };
-
   return (
     <div className="space-y-4">
       {Object.entries(grouped).map(([category, categoryLinks]) => (
         <div key={category}>
           <h4 className="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-500 mb-2 px-1">
-            {categoryLabels[category] || category}
+            {categoryLabels[category as QuickLink['category']] || category}
           </h4>
           <div className="space-y-1">
             {categoryLinks.map(link => (

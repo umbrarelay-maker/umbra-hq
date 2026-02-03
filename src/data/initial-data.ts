@@ -21,6 +21,7 @@ export interface Document {
   description: string;
   content?: string;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface Update {
@@ -34,7 +35,8 @@ export interface QuickLink {
   id: string;
   label: string;
   url: string;
-  category: 'site' | 'repo' | 'tool';
+  category: 'site' | 'repo' | 'tool' | 'docs' | 'resource';
+  description?: string;
 }
 
 export interface Blocker {
@@ -53,6 +55,17 @@ export interface DailyBriefing {
   keyItems: string[];
   whatsNext: string[];
   mood: 'productive' | 'blocked' | 'planning' | 'shipping';
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  description?: string;
+  status: 'todo' | 'in-progress' | 'done';
+  priority: 'low' | 'medium' | 'high';
+  projectId?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export const initialProjects: Project[] = [
@@ -396,63 +409,75 @@ export const initialQuickLinks: QuickLink[] = [
     id: '1',
     label: 'Demo Site',
     url: 'https://demo-site.vercel.app',
-    category: 'site'
+    category: 'site',
+    description: 'Public demo of Umbra capabilities'
   },
   {
     id: '2',
     label: 'Report Viewer',
     url: 'https://report-viewer.vercel.app',
-    category: 'site'
+    category: 'site',
+    description: 'View generated reports and analysis'
   },
   {
     id: '3',
     label: 'Umbra HQ',
     url: 'https://umbra-hq.vercel.app',
-    category: 'site'
+    category: 'site',
+    description: 'This dashboard'
   },
   {
     id: '4',
     label: 'Demo Site Repo',
     url: 'https://github.com/umbrarelay-maker/demo-site',
-    category: 'repo'
+    category: 'repo',
+    description: 'Source code for demo site'
   },
   {
     id: '5',
     label: 'Report Viewer Repo',
     url: 'https://github.com/umbrarelay-maker/report-viewer',
-    category: 'repo'
+    category: 'repo',
+    description: 'Source code for report viewer'
   },
   {
     id: '6',
     label: 'Chatbot Framework Repo',
     url: 'https://github.com/umbrarelay-maker/chatbot-framework',
-    category: 'repo'
+    category: 'repo',
+    description: 'Modular chatbot framework source'
   },
   {
     id: '7',
     label: 'Conduit AI Repo',
     url: 'https://github.com/umbrarelay-maker/conduit-ai',
-    category: 'repo'
+    category: 'repo',
+    description: 'Workflow automation platform source'
   },
   {
     id: '8',
     label: 'OpenClaw',
     url: 'https://openclaw.dev',
-    category: 'tool'
+    category: 'tool',
+    description: 'Agent runtime environment'
+  },
+  {
+    id: '9',
+    label: 'Vercel Dashboard',
+    url: 'https://vercel.com/dashboard',
+    category: 'tool',
+    description: 'Deployment management'
+  },
+  {
+    id: '10',
+    label: 'Anthropic Console',
+    url: 'https://console.anthropic.com',
+    category: 'tool',
+    description: 'Claude API management'
   }
 ];
 
-export const initialBlockers: Blocker[] = [
-  {
-    id: '1',
-    title: 'No blockers currently! 🎉',
-    description: 'All systems operational. Will flag any issues here as they arise.',
-    severity: 'medium',
-    category: 'other',
-    createdAt: '2026-02-03T05:40:00Z',
-    resolved: true
-  }
-];
+export const initialBlockers: Blocker[] = [];
 
 export const initialBriefing: DailyBriefing = {
   date: '2026-02-03',
@@ -471,3 +496,64 @@ export const initialBriefing: DailyBriefing = {
   ],
   mood: 'shipping'
 };
+
+export const initialTasks: Task[] = [
+  {
+    id: '1',
+    title: 'Polish Demo Site hero section',
+    description: 'Add animations and improve visual appeal',
+    status: 'in-progress',
+    priority: 'high',
+    projectId: '1',
+    createdAt: '2026-02-03T05:00:00Z',
+    updatedAt: '2026-02-03T05:00:00Z'
+  },
+  {
+    id: '2',
+    title: 'Add live conversation demo',
+    description: 'Interactive demo showing Umbra in action',
+    status: 'todo',
+    priority: 'high',
+    projectId: '1',
+    createdAt: '2026-02-03T05:00:00Z',
+    updatedAt: '2026-02-03T05:00:00Z'
+  },
+  {
+    id: '3',
+    title: 'Implement PDF export',
+    description: 'Allow users to export reports as PDF',
+    status: 'todo',
+    priority: 'medium',
+    projectId: '2',
+    createdAt: '2026-02-03T04:30:00Z',
+    updatedAt: '2026-02-03T04:30:00Z'
+  },
+  {
+    id: '4',
+    title: 'Complete OpenAI adapter',
+    description: 'Finish the OpenAI provider implementation',
+    status: 'in-progress',
+    priority: 'high',
+    projectId: '3',
+    createdAt: '2026-02-03T04:00:00Z',
+    updatedAt: '2026-02-03T04:00:00Z'
+  },
+  {
+    id: '5',
+    title: 'Write Twitter thread about Umbra',
+    description: 'Introduction thread for launch',
+    status: 'todo',
+    priority: 'medium',
+    projectId: '5',
+    createdAt: '2026-02-03T05:30:00Z',
+    updatedAt: '2026-02-03T05:30:00Z'
+  },
+  {
+    id: '6',
+    title: 'Set up Vercel analytics',
+    status: 'done',
+    priority: 'low',
+    createdAt: '2026-02-03T03:00:00Z',
+    updatedAt: '2026-02-03T04:00:00Z'
+  }
+];
