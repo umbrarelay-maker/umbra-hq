@@ -4,7 +4,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 interface RichTextEditorProps {
   content: string;
@@ -17,26 +17,28 @@ function MenuBar({ editor }: { editor: ReturnType<typeof useEditor> }) {
   if (!editor) return null;
 
   const buttonClass = (active: boolean) =>
-    `p-2 rounded-lg text-sm transition-colors ${
+    `p-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
       active
-        ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white'
-        : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+        ? 'bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
+        : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white'
     }`;
 
+  const dividerClass = "w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1";
+
   return (
-    <div className="flex flex-wrap items-center gap-1 p-2 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50">
+    <div className="flex flex-wrap items-center gap-0.5 p-3 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50/80 dark:bg-zinc-800/50">
       {/* Text formatting */}
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={buttonClass(editor.isActive('bold'))}
-        title="Bold"
+        title="Bold (⌘B)"
       >
         <span className="font-bold">B</span>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={buttonClass(editor.isActive('italic'))}
-        title="Italic"
+        title="Italic (⌘I)"
       >
         <span className="italic">I</span>
       </button>
@@ -52,17 +54,17 @@ function MenuBar({ editor }: { editor: ReturnType<typeof useEditor> }) {
         className={buttonClass(editor.isActive('highlight'))}
         title="Highlight"
       >
-        <span className="bg-yellow-300 dark:bg-yellow-600 px-1">H</span>
+        <span className="bg-indigo-200 dark:bg-indigo-600 px-1.5 rounded">H</span>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         className={buttonClass(editor.isActive('code'))}
         title="Inline Code"
       >
-        <span className="font-mono">&lt;/&gt;</span>
+        <span className="font-mono text-xs">&lt;/&gt;</span>
       </button>
 
-      <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1" />
+      <div className={dividerClass} />
 
       {/* Headings */}
       <button
@@ -87,7 +89,7 @@ function MenuBar({ editor }: { editor: ReturnType<typeof useEditor> }) {
         H3
       </button>
 
-      <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1" />
+      <div className={dividerClass} />
 
       {/* Lists */}
       <button
@@ -105,7 +107,7 @@ function MenuBar({ editor }: { editor: ReturnType<typeof useEditor> }) {
         1. List
       </button>
 
-      <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1" />
+      <div className={dividerClass} />
 
       {/* Block elements */}
       <button
@@ -136,16 +138,16 @@ function MenuBar({ editor }: { editor: ReturnType<typeof useEditor> }) {
       <button
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().undo()}
-        className={`${buttonClass(false)} disabled:opacity-30`}
-        title="Undo"
+        className={`${buttonClass(false)} disabled:opacity-30 disabled:cursor-not-allowed`}
+        title="Undo (⌘Z)"
       >
         ↶
       </button>
       <button
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().redo()}
-        className={`${buttonClass(false)} disabled:opacity-30`}
-        title="Redo"
+        className={`${buttonClass(false)} disabled:opacity-30 disabled:cursor-not-allowed`}
+        title="Redo (⌘⇧Z)"
       >
         ↷
       </button>
@@ -181,7 +183,7 @@ export default function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          'prose prose-zinc dark:prose-invert prose-sm max-w-none min-h-[300px] p-4 focus:outline-none',
+          'prose prose-zinc dark:prose-invert prose-sm max-w-none min-h-[350px] p-6 focus:outline-none',
       },
     },
   });
@@ -202,18 +204,21 @@ export default function RichTextEditor({
 
   if (!editor) {
     return (
-      <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-        <div className="h-12 bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-700" />
-        <div className="p-4 min-h-[300px] animate-pulse">
-          <div className="h-4 bg-zinc-200 dark:bg-zinc-700 rounded w-3/4 mb-2" />
-          <div className="h-4 bg-zinc-200 dark:bg-zinc-700 rounded w-1/2" />
+      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden">
+        <div className="h-14 bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-700" />
+        <div className="p-6 min-h-[350px]">
+          <div className="space-y-3 animate-pulse">
+            <div className="h-4 skeleton w-3/4" />
+            <div className="h-4 skeleton w-1/2" />
+            <div className="h-4 skeleton w-5/6" />
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden shadow-sm">
       {editable && <MenuBar editor={editor} />}
       <EditorContent editor={editor} />
     </div>

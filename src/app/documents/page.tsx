@@ -8,7 +8,7 @@ import { Document } from '@/data/initial-data';
 const categoryConfig = {
   audits: { icon: '◈', label: 'Audits', color: 'bg-rose-500/10 text-rose-600 dark:text-rose-400' },
   research: { icon: '◇', label: 'Research', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
-  marketing: { icon: '◆', label: 'Marketing', color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400' },
+  marketing: { icon: '◆', label: 'Marketing', color: 'bg-violet-500/10 text-violet-600 dark:text-violet-400' },
   technical: { icon: '◉', label: 'Technical', color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
   other: { icon: '○', label: 'Other', color: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400' },
 };
@@ -36,61 +36,64 @@ function NewDocModal({ onClose, onSave }: NewDocModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 w-full max-w-md border border-zinc-200 dark:border-zinc-800">
-        <h3 className="text-lg font-semibold mb-4">New Document</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="fixed inset-0 modal-backdrop flex items-center justify-center z-50 p-4 animate-fade-in" onClick={onClose}>
+      <div 
+        className="bg-white dark:bg-zinc-900 rounded-2xl p-6 w-full max-w-md border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-black/20 animate-fade-in-scale"
+        onClick={e => e.stopPropagation()}
+      >
+        <h3 className="text-xl font-semibold mb-6 text-zinc-900 dark:text-white">New Document</h3>
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs uppercase tracking-wider text-zinc-500 mb-1.5">
+            <label className="block text-xs uppercase tracking-wider font-bold text-zinc-500 mb-2">
               Title
             </label>
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="Document title..."
               autoFocus
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wider text-zinc-500 mb-1.5">
+            <label className="block text-xs uppercase tracking-wider font-bold text-zinc-500 mb-2">
               Description
             </label>
             <input
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
               placeholder="Brief description..."
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wider text-zinc-500 mb-1.5">
+            <label className="block text-xs uppercase tracking-wider font-bold text-zinc-500 mb-2">
               Category
             </label>
             <select
               value={category}
               onChange={e => setCategory(e.target.value as Document['category'])}
-              className="w-full px-3 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
             >
               {Object.entries(categoryConfig).map(([key, config]) => (
                 <option key={key} value={key}>{config.label}</option>
               ))}
             </select>
           </div>
-          <div className="flex gap-2 pt-2">
+          <div className="flex gap-3 pt-3">
             <div className="flex-1" />
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-lg text-sm text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="px-5 py-2.5 rounded-xl text-sm font-medium text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 rounded-lg text-sm bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
+              className="px-5 py-2.5 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press"
             >
               Create
             </button>
@@ -111,34 +114,35 @@ export default function DocumentsPage() {
     : documents.filter(d => d.category === filter);
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-5xl animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-start justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Documents</h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-1">
+          <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white">Documents</h1>
+          <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2">
             Create and manage documents with rich text editing
           </p>
         </div>
         <button
           onClick={() => setModalOpen(true)}
-          className="px-4 py-2 rounded-lg text-sm bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press shadow-lg shadow-zinc-900/10 dark:shadow-white/10"
         >
-          + New Document
+          <span className="text-lg">+</span>
+          New Document
         </button>
       </div>
 
       {/* Filter */}
-      <div className="flex gap-2 mb-6 flex-wrap">
+      <div className="flex flex-wrap gap-2 mb-8">
         <button
           onClick={() => setFilter('all')}
-          className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+          className={`text-xs font-medium px-4 py-2.5 rounded-xl transition-all duration-200 ${
             filter === 'all'
-              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/10 dark:shadow-white/10'
+              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white'
           }`}
         >
-          All ({documents.length})
+          All <span className={filter === 'all' ? 'opacity-60' : 'opacity-40'}>({documents.length})</span>
         </button>
         {Object.entries(categoryConfig).map(([key, config]) => {
           const count = documents.filter(d => d.category === key).length;
@@ -147,29 +151,38 @@ export default function DocumentsPage() {
             <button
               key={key}
               onClick={() => setFilter(key as Document['category'])}
-              className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+              className={`text-xs font-medium px-4 py-2.5 rounded-xl transition-all duration-200 inline-flex items-center gap-2 ${
                 filter === key
-                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/10 dark:shadow-white/10'
+                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white'
               }`}
             >
-              {config.icon} {config.label} ({count})
+              <span>{config.icon}</span>
+              {config.label}
+              <span className={filter === key ? 'opacity-60' : 'opacity-40'}>({count})</span>
             </button>
           );
         })}
       </div>
 
       {/* Documents Grid */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 stagger-children">
         {filteredDocs.map(doc => (
           <DocumentCard key={doc.id} document={doc} />
         ))}
       </div>
 
       {filteredDocs.length === 0 && (
-        <div className="text-center py-12 text-zinc-400 dark:text-zinc-600">
-          <p className="text-lg mb-2">No documents found</p>
-          <p className="text-sm">Create your first document to get started</p>
+        <div className="text-center py-16">
+          <div className="w-16 h-16 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-4">
+            <span className="text-2xl">📄</span>
+          </div>
+          <p className="text-sm text-zinc-500 dark:text-zinc-500 font-medium mb-1">
+            No documents found
+          </p>
+          <p className="text-xs text-zinc-400 dark:text-zinc-600">
+            Create your first document to get started
+          </p>
         </div>
       )}
 

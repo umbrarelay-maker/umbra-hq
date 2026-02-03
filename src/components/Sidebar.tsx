@@ -1,104 +1,162 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useData } from '@/context/DataContext';
 import SearchModal from './SearchModal';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: '◉' },
-  { href: '/projects', label: 'Projects', icon: '◈' },
-  { href: '/tasks', label: 'Tasks', icon: '◐' },
-  { href: '/documents', label: 'Documents', icon: '◇' },
-  { href: '/links', label: 'Links', icon: '↗' },
-  { href: '/updates', label: 'Updates', icon: '◆' },
+  { href: '/', label: 'Dashboard', icon: '◉', description: 'Overview' },
+  { href: '/projects', label: 'Projects', icon: '◈', description: 'Track work' },
+  { href: '/tasks', label: 'Tasks', icon: '◐', description: 'Kanban board' },
+  { href: '/documents', label: 'Documents', icon: '◇', description: 'Notes & docs' },
+  { href: '/links', label: 'Links', icon: '↗', description: 'Quick access' },
+  { href: '/updates', label: 'Updates', icon: '◆', description: 'Activity feed' },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { darkMode, toggleDarkMode, projects, tasks, updates } = useData();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   
   const activeProjects = projects.filter(p => p.status === 'active').length;
   const activeTasks = tasks.filter(t => t.status !== 'done').length;
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <>
-      <aside className="w-64 h-screen fixed left-0 top-0 bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 flex flex-col">
+      <aside className={`w-72 h-screen fixed left-0 top-0 bg-white/80 dark:bg-zinc-950/90 backdrop-blur-xl border-r border-zinc-200/80 dark:border-zinc-800/80 flex flex-col z-40 ${mounted ? 'animate-slide-in' : 'opacity-0'}`}>
         {/* Logo */}
-        <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
-          <h1 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">
-            Umbra<span className="text-zinc-400 dark:text-zinc-500">HQ</span>
-          </h1>
-          <p className="text-xs text-zinc-500 dark:text-zinc-600 mt-1">
-            Your AI Workspace
-          </p>
+        <div className="p-6 pb-5">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+              <span className="text-white font-bold text-lg">U</span>
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
+                Umbra<span className="text-indigo-500 dark:text-indigo-400">HQ</span>
+              </h1>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-600 font-medium">
+                AI Workspace
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Search */}
-        <div className="px-4 py-3">
+        <div className="px-4 pb-4">
           <button
             onClick={() => setSearchOpen(true)}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-zinc-500 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-zinc-500 dark:text-zinc-500 bg-zinc-100/80 dark:bg-zinc-900/80 hover:bg-zinc-200/80 dark:hover:bg-zinc-800/80 border border-zinc-200/50 dark:border-zinc-800/50 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700 group"
           >
-            <span>◎</span>
-            <span>Search...</span>
-            <span className="ml-auto text-xs bg-zinc-200 dark:bg-zinc-700 px-1.5 py-0.5 rounded">⌘K</span>
+            <svg className="w-4 h-4 text-zinc-400 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span className="flex-1 text-left">Search...</span>
+            <span className="text-[10px] font-medium bg-zinc-200 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-500 px-1.5 py-0.5 rounded-md">
+              ⌘K
+            </span>
           </button>
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 p-4 pt-0">
-          <ul className="space-y-1">
-            {navItems.map(item => (
-              <li key={item.href}>
+        <nav className="flex-1 px-3 overflow-y-auto">
+          <div className="space-y-1 stagger-children">
+            {navItems.map((item, index) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+              return (
                 <Link
+                  key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                    pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
-                      ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white font-medium'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white'
+                  className={`group flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-200 relative ${
+                    isActive
+                      ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/10 dark:shadow-white/10'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white'
                   }`}
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
-                  <span className="text-lg">{item.icon}</span>
-                  {item.label}
-                  {item.label === 'Projects' && (
-                    <span className="ml-auto text-xs bg-zinc-200 dark:bg-zinc-700 px-2 py-0.5 rounded-full">
+                  <span className={`text-lg transition-transform duration-200 ${!isActive && 'group-hover:scale-110'}`}>
+                    {item.icon}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-medium">{item.label}</span>
+                  </div>
+                  {item.label === 'Projects' && activeProjects > 0 && (
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition-colors ${
+                      isActive 
+                        ? 'bg-white/20 dark:bg-zinc-900/20' 
+                        : 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'
+                    }`}>
                       {activeProjects}
                     </span>
                   )}
                   {item.label === 'Tasks' && activeTasks > 0 && (
-                    <span className="ml-auto text-xs bg-amber-500/20 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full">
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition-colors ${
+                      isActive 
+                        ? 'bg-white/20 dark:bg-zinc-900/20' 
+                        : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                    }`}>
                       {activeTasks}
                     </span>
                   )}
-                  {item.label === 'Updates' && (
-                    <span className="ml-auto text-xs bg-zinc-200 dark:bg-zinc-700 px-2 py-0.5 rounded-full">
+                  {item.label === 'Updates' && updates.length > 0 && (
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full transition-colors ${
+                      isActive 
+                        ? 'bg-white/20 dark:bg-zinc-900/20' 
+                        : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400'
+                    }`}>
                       {updates.length}
                     </span>
                   )}
                 </Link>
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
+        <div className="p-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
           <button
             onClick={toggleDarkMode}
-            className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+            className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-all duration-200 group"
           >
-            <span>{darkMode ? '◐ Dark Mode' : '○ Light Mode'}</span>
-            <span className="text-xs">{darkMode ? 'On' : 'Off'}</span>
-          </button>
-          <div className="mt-3 px-3">
-            <div className="text-xs text-zinc-400 dark:text-zinc-600">
-              Joe × Umbra
+            <div className="flex items-center gap-3">
+              <span className="text-lg transition-transform duration-200 group-hover:rotate-12">
+                {darkMode ? '🌙' : '☀️'}
+              </span>
+              <span className="font-medium">{darkMode ? 'Dark Mode' : 'Light Mode'}</span>
             </div>
-            <div className="text-[10px] text-zinc-300 dark:text-zinc-700 mt-1">
-              v2.0 — Supabase coming soon
+            <div className={`w-10 h-6 rounded-full p-0.5 transition-colors ${darkMode ? 'bg-indigo-500' : 'bg-zinc-300'}`}>
+              <div className={`w-5 h-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${darkMode ? 'translate-x-4' : 'translate-x-0'}`} />
+            </div>
+          </button>
+          
+          <div className="mt-4 px-4">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-medium text-zinc-500 dark:text-zinc-500">
+                Joe × Umbra
+              </span>
+            </div>
+            <div className="text-[10px] text-zinc-400 dark:text-zinc-600 mt-1.5 font-medium">
+              v2.0 — Premium Edition
             </div>
           </div>
         </div>

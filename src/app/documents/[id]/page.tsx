@@ -9,7 +9,7 @@ import RichTextEditor from '@/components/RichTextEditor';
 const categoryStyles = {
   audits: { bg: 'bg-rose-500/10 text-rose-600 dark:text-rose-400', icon: '◈' },
   research: { bg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400', icon: '◇' },
-  marketing: { bg: 'bg-purple-500/10 text-purple-600 dark:text-purple-400', icon: '◆' },
+  marketing: { bg: 'bg-violet-500/10 text-violet-600 dark:text-violet-400', icon: '◆' },
   technical: { bg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', icon: '◉' },
   other: { bg: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400', icon: '○' },
 };
@@ -61,15 +61,19 @@ export default function DocumentDetailPage() {
 
   if (!doc) {
     return (
-      <div className="max-w-4xl">
-        <Link href="/documents" className="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 mb-4 inline-block">
-          ← Back to Documents
+      <div className="max-w-4xl animate-fade-in">
+        <Link href="/documents" className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 mb-6 group transition-colors">
+          <span className="transition-transform group-hover:-translate-x-0.5">←</span>
+          Back to Documents
         </Link>
-        <div className="text-center py-12">
+        <div className="text-center py-16">
+          <div className="w-16 h-16 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-4">
+            <span className="text-2xl">🔍</span>
+          </div>
           <h1 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
             Document Not Found
           </h1>
-          <p className="text-zinc-500 dark:text-zinc-500">
+          <p className="text-sm text-zinc-500 dark:text-zinc-500">
             The document you're looking for doesn't exist.
           </p>
         </div>
@@ -80,65 +84,68 @@ export default function DocumentDetailPage() {
   const category = categoryStyles[doc.category];
 
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-4xl animate-fade-in">
       {/* Back Link */}
-      <Link href="/documents" className="text-sm text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 mb-6 inline-flex items-center gap-1">
-        ← Back to Documents
+      <Link href="/documents" className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 mb-8 group transition-colors">
+        <span className="transition-transform group-hover:-translate-x-0.5">←</span>
+        Back to Documents
       </Link>
 
       {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <span className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl ${category.bg}`}>
+      <div className="mb-8">
+        <div className="flex items-center gap-4 mb-5">
+          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl ${category.bg}`}>
             {category.icon}
-          </span>
-          <span className={`text-xs font-medium px-3 py-1 rounded-full ${category.bg}`}>
+          </div>
+          <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${category.bg}`}>
             {doc.category.toUpperCase()}
           </span>
           {hasChanges && (
-            <span className="text-xs font-medium px-3 py-1 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400">
+            <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 animate-pulse">
               Unsaved changes
             </span>
           )}
         </div>
 
         {isEditing ? (
-          <div className="space-y-3 mb-4">
+          <div className="space-y-4 mb-5">
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full text-3xl font-semibold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-zinc-400 dark:focus:border-zinc-500 focus:outline-none py-1"
+              className="w-full text-3xl font-bold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none py-2 text-zinc-900 dark:text-white transition-colors"
               placeholder="Document title..."
             />
             <input
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-zinc-400 dark:focus:border-zinc-500 focus:outline-none py-1"
+              className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:outline-none py-2 transition-colors"
               placeholder="Brief description..."
             />
           </div>
         ) : (
           <>
-            <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-3">
+            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-3">
               {doc.title}
             </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-4">
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-5">
               {doc.description}
             </p>
           </>
         )}
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <p className="text-sm text-zinc-500 dark:text-zinc-500">
             Created {new Date(doc.createdAt).toLocaleDateString('en-US', { 
               month: 'long', day: 'numeric', year: 'numeric' 
             })}
             {doc.updatedAt && doc.updatedAt !== doc.createdAt && (
-              <span> • Updated {new Date(doc.updatedAt).toLocaleDateString('en-US', { 
-                month: 'long', day: 'numeric', year: 'numeric' 
-              })}</span>
+              <span className="text-zinc-400 dark:text-zinc-600">
+                {' '}• Updated {new Date(doc.updatedAt).toLocaleDateString('en-US', { 
+                  month: 'long', day: 'numeric', year: 'numeric' 
+                })}
+              </span>
             )}
           </p>
           <div className="flex-1" />
@@ -152,14 +159,14 @@ export default function DocumentDetailPage() {
                     setDescription(doc.description);
                     setIsEditing(false);
                   }}
-                  className="px-4 py-2 rounded-lg text-sm text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={!hasChanges}
-                  className="px-4 py-2 rounded-lg text-sm bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors disabled:opacity-50"
+                  className="px-5 py-2 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Save
                 </button>
@@ -168,13 +175,13 @@ export default function DocumentDetailPage() {
               <>
                 <button
                   onClick={handleDelete}
-                  className="px-4 py-2 rounded-lg text-sm text-red-500 hover:bg-red-500/10 transition-colors"
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors"
                 >
                   Delete
                 </button>
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="px-4 py-2 rounded-lg text-sm bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors"
+                  className="px-5 py-2 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press"
                 >
                   Edit
                 </button>
@@ -186,14 +193,18 @@ export default function DocumentDetailPage() {
 
       {/* External Link */}
       {doc.url && (
-        <div className="mb-6">
+        <div className="mb-8">
           <a
             href={doc.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium px-5 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all group"
           >
-            View External Document →
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            View External Document
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
       )}

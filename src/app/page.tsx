@@ -16,23 +16,40 @@ export default function Dashboard() {
   const activeBlockers = blockers.filter(b => !b.resolved).length;
 
   return (
-    <div className="max-w-6xl">
+    <div className="max-w-6xl space-y-8">
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-        <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-1">
-          Welcome back, Joe. Here's your overview.
-        </p>
+      <div className="animate-fade-in">
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-sm font-medium text-indigo-500 dark:text-indigo-400 mb-1">
+              Welcome back
+            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white">
+              Dashboard
+            </h1>
+            <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2 max-w-md">
+              Here's what's happening with your projects today.
+            </p>
+          </div>
+          <div className="hidden md:flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-500">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            All systems operational
+          </div>
+        </div>
       </div>
 
       {/* Blockers Panel - Always at top, impossible to miss */}
-      <BlockersPanel blockers={blockers} />
+      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <BlockersPanel blockers={blockers} />
+      </div>
 
       {/* Daily Briefing */}
-      <DailyBriefing briefing={briefing} />
+      <div className="animate-slide-up" style={{ animationDelay: '0.15s' }}>
+        <DailyBriefing briefing={briefing} />
+      </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
         <StatsCard label="Active Projects" value={activeProjects} icon="◈" accent />
         <StatsCard label="Completed" value={completedProjects} icon="✓" />
         <StatsCard label="Documents" value={documents.length} icon="◇" />
@@ -40,42 +57,55 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Updates */}
-        <div className="col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Recent Updates</h2>
-            <a href="/updates" className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">
-              View all →
+        <div className="lg:col-span-2 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Recent Updates</h2>
+              <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">Latest activity across all projects</p>
+            </div>
+            <a href="/updates" className="text-xs font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1 group">
+              View all
+              <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </a>
           </div>
           <UpdateFeed updates={updates} limit={5} />
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Active Projects */}
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Active Projects</h2>
-              <a href="/projects" className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">
-                View all →
+          <div className="animate-slide-up" style={{ animationDelay: '0.25s' }}>
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Active Projects</h2>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-0.5">Your current work</p>
+              </div>
+              <a href="/projects" className="text-xs font-medium text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors flex items-center gap-1 group">
+                View all
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
               </a>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3 stagger-children">
               {projects
                 .filter(p => p.status === 'active')
                 .slice(0, 5)
                 .map(project => (
                   <ProjectCard key={project.id} project={project} compact />
                 ))}
+              {projects.filter(p => p.status === 'active').length === 0 && (
+                <div className="text-center py-8 text-sm text-zinc-500 dark:text-zinc-500">
+                  No active projects
+                </div>
+              )}
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
-            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+          <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <h2 className="text-lg font-semibold text-zinc-900 dark:text-white mb-5">Quick Links</h2>
+            <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
               <QuickLinks links={quickLinks} />
             </div>
           </div>
