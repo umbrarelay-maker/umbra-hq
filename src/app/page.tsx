@@ -5,22 +5,31 @@ import StatsCard from '@/components/StatsCard';
 import UpdateFeed from '@/components/UpdateFeed';
 import ProjectCard from '@/components/ProjectCard';
 import QuickLinks from '@/components/QuickLinks';
+import DailyBriefing from '@/components/DailyBriefing';
+import BlockersPanel from '@/components/BlockersPanel';
 
 export default function Dashboard() {
-  const { projects, documents, updates, quickLinks } = useData();
+  const { projects, documents, updates, quickLinks, blockers, briefing } = useData();
   
   const activeProjects = projects.filter(p => p.status === 'active').length;
   const completedProjects = projects.filter(p => p.status === 'completed').length;
+  const activeBlockers = blockers.filter(b => !b.resolved).length;
 
   return (
     <div className="max-w-6xl">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
         <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-1">
-          Welcome back. Here's what's happening.
+          Welcome back, Joe. Here's your overview.
         </p>
       </div>
+
+      {/* Blockers Panel - Always at top, impossible to miss */}
+      <BlockersPanel blockers={blockers} />
+
+      {/* Daily Briefing */}
+      <DailyBriefing briefing={briefing} />
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4 mb-8">

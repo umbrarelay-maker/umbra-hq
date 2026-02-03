@@ -48,3 +48,17 @@ body {
   background: #a1a1aa;
   color: #18181b;
 }
+
+/* Subtle pulse animation for critical alerts */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}

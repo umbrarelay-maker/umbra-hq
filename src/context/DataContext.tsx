@@ -6,10 +6,14 @@ import {
   Document,
   Update,
   QuickLink,
+  Blocker,
+  DailyBriefing,
   initialProjects,
   initialDocuments,
   initialUpdates,
-  initialQuickLinks
+  initialQuickLinks,
+  initialBlockers,
+  initialBriefing
 } from '@/data/initial-data';
 
 interface DataContextType {
@@ -17,9 +21,16 @@ interface DataContextType {
   documents: Document[];
   updates: Update[];
   quickLinks: QuickLink[];
+  blockers: Blocker[];
+  briefing: DailyBriefing;
   addUpdate: (content: string, type: Update['type']) => void;
   updateProject: (id: string, data: Partial<Project>) => void;
   addProject: (project: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  addBlocker: (blocker: Omit<Blocker, 'id' | 'createdAt' | 'resolved'>) => void;
+  resolveBlocker: (id: string) => void;
+  updateBriefing: (briefing: Partial<DailyBriefing>) => void;
+  getProjectById: (id: string) => Project | undefined;
+  getDocumentById: (id: string) => Document | undefined;
   darkMode: boolean;
   toggleDarkMode: () => void;
 }
@@ -31,6 +42,8 @@ const STORAGE_KEYS = {
   documents: 'umbra-hq-documents',
   updates: 'umbra-hq-updates',
   quickLinks: 'umbra-hq-quicklinks',
+  blockers: 'umbra-hq-blockers',
+  briefing: 'umbra-hq-briefing',
   darkMode: 'umbra-hq-darkmode'
 };
 
@@ -39,6 +52,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [documents, setDocuments] = useState<Document[]>(initialDocuments);
   const [updates, setUpdates] = useState<Update[]>(initialUpdates);
   const [quickLinks, setQuickLinks] = useState<QuickLink[]>(initialQuickLinks);
+  const [blockers, setBlockers] = useState<Blocker[]>(initialBlockers);
+  const [briefing, setBriefing] = useState<DailyBriefing>(initialBriefing);
   const [darkMode, setDarkMode] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -49,12 +64,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
       const storedDocuments = localStorage.getItem(STORAGE_KEYS.documents);
       const storedUpdates = localStorage.getItem(STORAGE_KEYS.updates);
       const storedQuickLinks = localStorage.getItem(STORAGE_KEYS.quickLinks);
+      const storedBlockers = localStorage.getItem(STORAGE_KEYS.blockers);
+      const storedBriefing = localStorage.getItem(STORAGE_KEYS.briefing);
       const storedDarkMode = localStorage.getItem(STORAGE_KEYS.darkMode);
 
       if (storedProjects) setProjects(JSON.parse(storedProjects));
       if (storedDocuments) setDocuments(JSON.parse(storedDocuments));
       if (storedUpdates) setUpdates(JSON.parse(storedUpdates));
       if (storedQuickLinks) setQuickLinks(JSON.parse(storedQuickLinks));
+      if (storedBlockers) setBlockers(JSON.parse(storedBlockers));
+      if (storedBriefing) setBriefing(JSON.parse(storedBriefing));
       if (storedDarkMode !== null) setDarkMode(JSON.parse(storedDarkMode));
       
       setIsLoaded(true);
@@ -85,6 +104,18 @@ export function DataProvider({ children }: { children: ReactNode }) {
       localStorage.setItem(STORAGE_KEYS.quickLinks, JSON.stringify(quickLinks));
     }
   }, [quickLinks, isLoaded]);
+
+  useEffect(() => {
+    if (isLoaded && typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.blockers, JSON.stringify(blockers));
+    }
+  }, [blockers, isLoaded]);
+
+  useEffect(() => {
+    if (isLoaded && typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEYS.briefing, JSON.stringify(briefing));
+    }
+  }, [briefing, isLoaded]);
 
   useEffect(() => {
     if (isLoaded && typeof window !== 'undefined') {
@@ -129,6 +160,29 @@ export function DataProvider({ children }: { children: ReactNode }) {
     setProjects(prev => [newProject, ...prev]);
   };
 
+  const addBlocker = (blocker: Omit<Blocker, 'id' | 'createdAt' | 'resolved'>) => {
+    const newBlocker: Blocker = {
+      ...blocker,
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+      resolved: false
+    };
+    setBlockers(prev => [newBlocker, ...prev]);
+  };
+
+  const resolveBlocker = (id: string) => {
+    setBlockers(prev =>
+      prev.map(b => (b.id === id ? { ...b, resolved: true } : b))
+    );
+  };
+
+  const updateBriefing = (data: Partial<DailyBriefing>) => {
+    setBriefing(prev => ({ ...prev, ...data }));
+  };
+
+  const getProjectById = (id: string) => projects.find(p => p.id === id);
+  const getDocumentById = (id: string) => documents.find(d => d.id === id);
+
   const toggleDarkMode = () => {
     setDarkMode(prev => !prev);
   };
@@ -140,9 +194,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
         documents,
         updates,
         quickLinks,
+        blockers,
+        briefing,
         addUpdate,
         updateProject,
         addProject,
+        addBlocker,
+        resolveBlocker,
+        updateBriefing,
+        getProjectById,
+        getDocumentById,
         darkMode,
         toggleDarkMode
       }}
