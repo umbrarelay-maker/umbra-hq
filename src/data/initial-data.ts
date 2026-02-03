@@ -367,6 +367,12 @@ Position Umbra as the AI teammate that developers actually want to work with.
 
 export const initialUpdates: Update[] = [
   {
+    id: '0',
+    content: '🎉 Umbra HQ v2.0 deployed! Full workspace upgrade complete. New features: Rich Text Editor (Tiptap), Kanban Task Board with drag-and-drop, Global Search, Link Library, enhanced Project & Document pages with inline editing. All data persists to localStorage. Supabase integration coming next!',
+    timestamp: '2026-02-03T06:00:00Z',
+    type: 'milestone'
+  },
+  {
     id: '1',
     content: '🚀 Created Umbra HQ dashboard - our central collaboration hub is now live!',
     timestamp: '2026-02-03T05:40:00Z',
