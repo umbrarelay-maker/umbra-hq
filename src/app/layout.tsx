@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 import { DataProvider } from "@/context/DataContext";
-import Sidebar from "@/components/Sidebar";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import AppShell from "@/components/AppShell";
 
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ["latin"],
@@ -23,16 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${plusJakarta.className} bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 antialiased`}>
-        <DataProvider>
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <main className="flex-1 ml-72 p-10">
-              <div className="animate-fade-in">
-                {children}
-              </div>
-            </main>
-          </div>
-        </DataProvider>
+        <AuthProvider>
+          <ProtectedRoute>
+            <DataProvider>
+              <AppShell>{children}</AppShell>
+            </DataProvider>
+          </ProtectedRoute>
+        </AuthProvider>
       </body>
     </html>
   );
