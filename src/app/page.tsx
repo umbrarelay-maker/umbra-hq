@@ -32,8 +32,8 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="hidden md:flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            All systems operational
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            Systems operational
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default function Dashboard() {
           {/* Quick Links */}
           <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
             <h2 className="text-lg font-semibold text-zinc-900 dark:text-white mb-5">Quick Links</h2>
-            <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+            <div className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
               <QuickLinks links={quickLinks} />
             </div>
           </div>

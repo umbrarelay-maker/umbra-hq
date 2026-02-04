@@ -50,20 +50,18 @@ export default function LoginPage() {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-sky-400 to-pink-500 rounded-xl flex items-center justify-center shadow-lg shadow-sky-500/25">
-              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+            <div className="w-10 h-10 bg-gradient-to-br from-sky-500 to-pink-400 rounded-lg flex items-center justify-center shadow-md">
+              <span className="text-white font-semibold text-lg">U</span>
             </div>
-            <span className="text-2xl font-bold text-white">Umbra HQ</span>
+            <span className="text-xl font-semibold text-white">Umbra HQ</span>
           </div>
-          <p className="text-zinc-400">
-            {mode === 'login' ? 'Sign in to your dashboard' : 'Reset your password'}
+          <p className="text-zinc-500 text-sm">
+            {mode === 'login' ? 'Sign in to continue' : 'Reset your password'}
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-8 backdrop-blur-sm">
+        <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-6 backdrop-blur-sm">
           {resetSent ? (
             <div className="text-center">
               <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -81,7 +79,7 @@ export default function LoginPage() {
                   setResetSent(false);
                   setEmail('');
                 }}
-                className="text-pink-400 hover:text-pink-300 text-sm font-medium transition-colors"
+                className="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors"
               >
                 Back to sign in
               </button>
@@ -104,7 +102,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-colors"
                   placeholder="joe@example.com"
                 />
               </div>
@@ -120,7 +118,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 bg-zinc-800/50 border border-zinc-700 rounded text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-colors"
                     placeholder="••••••••"
                   />
                 </div>
@@ -129,7 +127,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-pink-500 hover:from-sky-500 hover:to-pink-600 text-white font-medium rounded-lg shadow-lg shadow-sky-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="w-full py-2.5 px-4 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {isLoading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -149,7 +147,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setMode('reset')}
-                    className="text-pink-400 hover:text-pink-300 text-sm font-medium transition-colors"
+                    className="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors"
                   >
                     Forgot your password?
                   </button>
@@ -157,7 +155,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setMode('login')}
-                    className="text-pink-400 hover:text-pink-300 text-sm font-medium transition-colors"
+                    className="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors"
                   >
                     Back to sign in
                   </button>
