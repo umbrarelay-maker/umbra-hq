@@ -579,15 +579,33 @@ Position Umbra as the AI teammate that developers actually want to work with.
 
 export const initialUpdates: Update[] = [
   {
+    id: '-5',
+    content: 'Fixed document page formatting — consistent rounded-lg, cleaner category badges, tighter spacing throughout',
+    timestamp: '2026-02-04T03:55:00Z',
+    type: 'task'
+  },
+  {
+    id: '-4',
+    content: 'Daily briefing visual refresh — replaced plum gradient with subtle sky-blue, cleaner icons',
+    timestamp: '2026-02-04T03:52:00Z',
+    type: 'task'
+  },
+  {
+    id: '-3',
+    content: '✨ Umbra HQ formal UI refresh — smaller radii, subtler animations, sky-blue/pink accents, more professional feel',
+    timestamp: '2026-02-04T03:45:00Z',
+    type: 'milestone'
+  },
+  {
     id: '-2',
     content: '📄 Created "AI Discovery Call → CRM Enrichment" plan document. Full implementation guide for extracting structured data from sales calls using AI and pushing to HubSpot/Salesforce.',
-    timestamp: '2026-02-04T03:45:00Z',
+    timestamp: '2026-02-04T03:30:00Z',
     type: 'task'
   },
   {
     id: '-1',
     content: '🚀 Nyx Chat major update: Multi-provider AI (OpenAI/Anthropic/Google), URL import with Readability, client API key support, 7 widget icons, sophisticated dark UI. Ready for auth integration!',
-    timestamp: '2026-02-04T03:30:00Z',
+    timestamp: '2026-02-04T03:00:00Z',
     type: 'milestone'
   },
   {
@@ -711,25 +729,35 @@ export const initialBlockers: Blocker[] = [];
 
 export const initialBriefing: DailyBriefing = {
   date: '2026-02-04',
-  summary: 'Major progress on Nyx Chat! Rebranded chatbot framework, added multi-provider AI support (OpenAI/Anthropic/Google), built RAG infrastructure with URL import, and created the Discovery Call → CRM plan for Joe\'s work project.',
+  summary: 'Shipped Nyx Chat with multi-provider AI and refined Umbra HQ\'s design. Both apps now share a cohesive formal aesthetic — smaller radii, sky-blue/pink accents, subtler animations. Ready to test Nyx with real API keys.',
   keyItems: [
-    'Nyx Chat rebrand complete with dark, sophisticated UI',
+    'Nyx Chat rebrand complete with sophisticated dark UI',
     'Multi-provider AI: GPT-5.2, Claude Haiku 4.5, Gemini 3 Flash',
+    'Umbra HQ formal UI refresh deployed',
     'URL import feature using Mozilla Readability',
-    'Discovery Call → CRM enrichment plan created',
-    'Client API key field added (needs encryption before prod)'
+    'Discovery Call → CRM enrichment plan created'
   ],
   whatsNext: [
-    'Add auth/accounts to Nyx Chat (Phase 4)',
     'Run SQL schema in Supabase for RAG',
-    'Test with real API key end-to-end',
-    'Find domain for Nyx (nyx.chat taken)',
+    'Test Nyx Chat with real API key end-to-end',
+    'Add auth/accounts to Nyx Chat (Phase 4)',
+    'Secure domain (getnyx.ai or usenyx.com)',
     'Review Discovery Call plan with Joe'
   ],
   mood: 'shipping'
 };
 
 export const initialTasks: Task[] = [
+  {
+    id: '0',
+    title: 'Run Nyx Chat SQL schema in Supabase',
+    description: 'Execute supabase/schema.sql in Supabase SQL Editor to enable RAG',
+    status: 'todo',
+    priority: 'high',
+    projectId: '3',
+    createdAt: '2026-02-04T03:55:00Z',
+    updatedAt: '2026-02-04T03:55:00Z'
+  },
   {
     id: '1',
     title: 'Polish Demo Site hero section',
