@@ -6,11 +6,11 @@ import DocumentCard from '@/components/DocumentCard';
 import { Document } from '@/data/initial-data';
 
 const categoryConfig = {
-  audits: { icon: '◈', label: 'Audits', color: 'bg-rose-500/10 text-rose-600 dark:text-rose-400' },
-  research: { icon: '◇', label: 'Research', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400' },
-  marketing: { icon: '◆', label: 'Marketing', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400' },
-  technical: { icon: '◉', label: 'Technical', color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
-  other: { icon: '○', label: 'Other', color: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400' },
+  audits: { icon: '◈', label: 'Audits', color: 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400' },
+  research: { icon: '◇', label: 'Research', color: 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400' },
+  marketing: { icon: '◆', label: 'Marketing', color: 'bg-pink-50 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400' },
+  technical: { icon: '◉', label: 'Technical', color: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' },
+  other: { icon: '○', label: 'Other', color: 'bg-zinc-100 dark:bg-zinc-500/10 text-zinc-600 dark:text-zinc-400' },
 };
 
 interface NewDocModalProps {
@@ -38,62 +38,62 @@ function NewDocModal({ onClose, onSave }: NewDocModalProps) {
   return (
     <div className="fixed inset-0 modal-backdrop flex items-center justify-center z-50 p-4 animate-fade-in" onClick={onClose}>
       <div 
-        className="bg-white dark:bg-zinc-900 rounded-2xl p-6 w-full max-w-md border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-black/20 animate-fade-in-scale"
+        className="bg-white dark:bg-zinc-900 rounded-lg p-5 w-full max-w-md border border-zinc-200 dark:border-zinc-800 shadow-xl animate-fade-in-scale"
         onClick={e => e.stopPropagation()}
       >
-        <h3 className="text-xl font-semibold mb-6 text-zinc-900 dark:text-white">New Document</h3>
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <h3 className="text-lg font-semibold mb-5 text-zinc-900 dark:text-white">New Document</h3>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs uppercase tracking-wider font-bold text-zinc-500 mb-2">
+            <label className="block text-[10px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">
               Title
             </label>
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="w-full px-3 py-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-colors"
               placeholder="Document title..."
               autoFocus
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wider font-bold text-zinc-500 mb-2">
+            <label className="block text-[10px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">
               Description
             </label>
             <input
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="w-full px-3 py-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-colors"
               placeholder="Brief description..."
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wider font-bold text-zinc-500 mb-2">
+            <label className="block text-[10px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">
               Category
             </label>
             <select
               value={category}
               onChange={e => setCategory(e.target.value as Document['category'])}
-              className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="w-full px-3 py-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-colors"
             >
               {Object.entries(categoryConfig).map(([key, config]) => (
                 <option key={key} value={key}>{config.label}</option>
               ))}
             </select>
           </div>
-          <div className="flex gap-3 pt-3">
+          <div className="flex gap-2 pt-2">
             <div className="flex-1" />
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl text-sm font-medium text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="px-4 py-2 rounded text-sm font-medium text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press"
+              className="px-4 py-2 rounded text-sm font-medium bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-white transition-colors"
             >
               Create
             </button>
@@ -116,29 +116,29 @@ export default function DocumentsPage() {
   return (
     <div className="max-w-5xl animate-fade-in">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex items-start justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white">Documents</h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2">
-            Create and manage documents with rich text editing
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white">Documents</h1>
+          <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-1">
+            Create and manage documents
           </p>
         </div>
         <button
           onClick={() => setModalOpen(true)}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press shadow-lg shadow-zinc-900/10 dark:shadow-white/10"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-white transition-colors"
         >
-          <span className="text-lg">+</span>
+          <span>+</span>
           New Document
         </button>
       </div>
 
       {/* Filter */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap gap-1.5 mb-6">
         <button
           onClick={() => setFilter('all')}
-          className={`text-xs font-medium px-4 py-2.5 rounded-xl transition-all duration-200 ${
+          className={`text-xs font-medium px-3 py-1.5 rounded-lg transition-colors duration-150 ${
             filter === 'all'
-              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/10 dark:shadow-white/10'
+              ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
               : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white'
           }`}
         >
@@ -151,9 +151,9 @@ export default function DocumentsPage() {
             <button
               key={key}
               onClick={() => setFilter(key as Document['category'])}
-              className={`text-xs font-medium px-4 py-2.5 rounded-xl transition-all duration-200 inline-flex items-center gap-2 ${
+              className={`text-xs font-medium px-3 py-1.5 rounded-lg transition-colors duration-150 inline-flex items-center gap-1.5 ${
                 filter === key
-                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/10 dark:shadow-white/10'
+                  ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
                   : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white'
               }`}
             >
@@ -173,9 +173,9 @@ export default function DocumentsPage() {
       </div>
 
       {filteredDocs.length === 0 && (
-        <div className="text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">📄</span>
+        <div className="text-center py-12">
+          <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-3">
+            <span className="text-lg opacity-50">◫</span>
           </div>
           <p className="text-sm text-zinc-500 dark:text-zinc-500 font-medium mb-1">
             No documents found

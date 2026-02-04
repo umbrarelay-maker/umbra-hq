@@ -204,9 +204,9 @@ export default function RichTextEditor({
 
   if (!editor) {
     return (
-      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden">
-        <div className="h-14 bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-700" />
-        <div className="p-6 min-h-[350px]">
+      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden">
+        <div className="h-12 bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-700" />
+        <div className="p-5 min-h-[300px]">
           <div className="space-y-3 animate-pulse">
             <div className="h-4 skeleton w-3/4" />
             <div className="h-4 skeleton w-1/2" />
@@ -218,7 +218,7 @@ export default function RichTextEditor({
   }
 
   return (
-    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden shadow-sm">
+    <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden">
       {editable && <MenuBar editor={editor} />}
       <EditorContent editor={editor} />
     </div>

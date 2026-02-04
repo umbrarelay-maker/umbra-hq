@@ -10,30 +10,30 @@ const moodConfig = {
   productive: { 
     icon: '⚡', 
     label: 'Productive', 
-    gradient: 'from-emerald-500/10 to-emerald-500/5',
-    border: 'border-emerald-500/20',
-    badge: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
+    gradient: 'from-emerald-500/8 to-transparent',
+    border: 'border-emerald-500/15',
+    badge: 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
   },
   blocked: { 
-    icon: '🚧', 
+    icon: '⚠', 
     label: 'Blocked', 
-    gradient: 'from-red-500/10 to-red-500/5',
-    border: 'border-red-500/20',
-    badge: 'bg-red-500/15 text-red-600 dark:text-red-400'
+    gradient: 'from-amber-500/8 to-transparent',
+    border: 'border-amber-500/15',
+    badge: 'bg-amber-50 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400'
   },
   planning: { 
-    icon: '🎯', 
+    icon: '◎', 
     label: 'Planning', 
-    gradient: 'from-blue-500/10 to-blue-500/5',
-    border: 'border-blue-500/20',
-    badge: 'bg-blue-500/15 text-blue-600 dark:text-blue-400'
+    gradient: 'from-sky-500/8 to-transparent',
+    border: 'border-sky-500/15',
+    badge: 'bg-sky-50 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400'
   },
   shipping: { 
-    icon: '🚀', 
+    icon: '→', 
     label: 'Shipping', 
-    gradient: 'from-pink-500/10 to-pink-500/5',
-    border: 'border-pink-500/20',
-    badge: 'bg-pink-500/15 text-pink-600 dark:text-pink-400'
+    gradient: 'from-sky-500/8 to-transparent',
+    border: 'border-sky-500/15',
+    badge: 'bg-sky-50 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400'
   },
 };
 
@@ -51,64 +51,59 @@ export default function DailyBriefing({ briefing }: DailyBriefingProps) {
   const mood = moodConfig[briefing.mood];
 
   return (
-    <div className={`relative overflow-hidden p-8 rounded-2xl bg-gradient-to-br ${mood.gradient} border-2 ${mood.border}`}>
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-white/5 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      
+    <div className={`relative overflow-hidden p-6 rounded-lg bg-gradient-to-br ${mood.gradient} border ${mood.border}`}>
       {/* Header */}
-      <div className="relative flex items-start justify-between mb-6">
+      <div className="flex items-start justify-between mb-5">
         <div>
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-3xl animate-bounce" style={{ animationDuration: '2s' }}>{mood.icon}</span>
-            <div>
-              <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
-                Daily Briefing
-              </h2>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
-                {formatDate(briefing.date)}
-              </p>
-            </div>
+          <div className="flex items-center gap-2.5 mb-1">
+            <span className="text-xl opacity-70">{mood.icon}</span>
+            <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+              Daily Briefing
+            </h2>
           </div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 ml-8">
+            {formatDate(briefing.date)}
+          </p>
         </div>
-        <span className={`text-xs font-bold px-4 py-1.5 rounded-full ${mood.badge}`}>
+        <span className={`text-[10px] font-medium px-2.5 py-1 rounded ${mood.badge}`}>
           {mood.label}
         </span>
       </div>
 
       {/* Summary */}
-      <p className="relative text-base text-zinc-700 dark:text-zinc-300 leading-relaxed mb-8 max-w-3xl">
+      <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-6 max-w-3xl">
         {briefing.summary}
       </p>
 
       {/* Two columns */}
-      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Key Items */}
-        <div className="bg-white/50 dark:bg-zinc-900/30 rounded-xl p-5 border border-zinc-200/50 dark:border-zinc-800/50">
-          <h3 className="text-xs uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400 mb-4 flex items-center gap-2">
-            <span className="w-5 h-5 rounded-md bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">✓</span>
+        <div className="bg-white/60 dark:bg-zinc-900/40 rounded-lg p-4 border border-zinc-200/50 dark:border-zinc-800/50">
+          <h3 className="text-[10px] uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500 mb-3 flex items-center gap-2">
+            <span className="text-emerald-500">✓</span>
             Key Items
           </h3>
-          <ul className="space-y-3">
+          <ul className="space-y-2">
             {briefing.keyItems.map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-zinc-600 dark:text-zinc-400 group">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 group-hover:scale-150 transition-transform" />
-                <span className="group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{item}</span>
+              <li key={i} className="flex items-start gap-2.5 text-sm text-zinc-600 dark:text-zinc-400">
+                <span className="w-1 h-1 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* What's Next */}
-        <div className="bg-white/50 dark:bg-zinc-900/30 rounded-xl p-5 border border-zinc-200/50 dark:border-zinc-800/50">
-          <h3 className="text-xs uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400 mb-4 flex items-center gap-2">
-            <span className="w-5 h-5 rounded-md bg-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">→</span>
+        <div className="bg-white/60 dark:bg-zinc-900/40 rounded-lg p-4 border border-zinc-200/50 dark:border-zinc-800/50">
+          <h3 className="text-[10px] uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500 mb-3 flex items-center gap-2">
+            <span className="text-sky-500">→</span>
             What's Next
           </h3>
-          <ul className="space-y-3">
+          <ul className="space-y-2">
             {briefing.whatsNext.map((item, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-zinc-600 dark:text-zinc-400 group">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0 group-hover:scale-150 transition-transform" />
-                <span className="group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{item}</span>
+              <li key={i} className="flex items-start gap-2.5 text-sm text-zinc-600 dark:text-zinc-400">
+                <span className="w-1 h-1 rounded-full bg-sky-500 mt-2 shrink-0" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>

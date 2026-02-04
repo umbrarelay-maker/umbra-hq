@@ -7,11 +7,11 @@ import Link from 'next/link';
 import RichTextEditor from '@/components/RichTextEditor';
 
 const categoryStyles = {
-  audits: { bg: 'bg-rose-500/10 text-rose-600 dark:text-rose-400', icon: '◈' },
-  research: { bg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400', icon: '◇' },
-  marketing: { bg: 'bg-pink-500/10 text-pink-600 dark:text-pink-400', icon: '◆' },
-  technical: { bg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', icon: '◉' },
-  other: { bg: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400', icon: '○' },
+  audits: { bg: 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400', icon: '◈' },
+  research: { bg: 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400', icon: '◇' },
+  marketing: { bg: 'bg-pink-50 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400', icon: '◆' },
+  technical: { bg: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', icon: '◉' },
+  other: { bg: 'bg-zinc-100 dark:bg-zinc-500/10 text-zinc-600 dark:text-zinc-400', icon: '○' },
 };
 
 export default function DocumentDetailPage() {
@@ -67,10 +67,10 @@ export default function DocumentDetailPage() {
           Back to Documents
         </Link>
         <div className="text-center py-16">
-          <div className="w-16 h-16 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">🔍</span>
+          <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-4">
+            <span className="text-xl opacity-50">◇</span>
           </div>
-          <h1 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
+          <h1 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2">
             Document Not Found
           </h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-500">
@@ -92,44 +92,44 @@ export default function DocumentDetailPage() {
       </Link>
 
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-4 mb-5">
-          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl ${category.bg}`}>
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl ${category.bg}`}>
             {category.icon}
           </div>
-          <span className={`text-xs font-bold px-3 py-1.5 rounded-full ${category.bg}`}>
+          <span className={`text-[10px] font-medium px-2 py-0.5 rounded ${category.bg}`}>
             {doc.category.toUpperCase()}
           </span>
           {hasChanges && (
-            <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 animate-pulse">
-              Unsaved changes
+            <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400">
+              Unsaved
             </span>
           )}
         </div>
 
         {isEditing ? (
-          <div className="space-y-4 mb-5">
+          <div className="space-y-3 mb-4">
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
-              className="w-full text-3xl font-bold tracking-tight bg-transparent border-b-2 border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-2 text-zinc-900 dark:text-white transition-colors"
+              className="w-full text-2xl font-semibold tracking-tight bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-1.5 text-zinc-900 dark:text-white transition-colors"
               placeholder="Document title..."
             />
             <input
               type="text"
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full text-lg text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-2 transition-colors"
+              className="w-full text-base text-zinc-600 dark:text-zinc-400 bg-transparent border-b border-zinc-200 dark:border-zinc-700 focus:border-sky-500 dark:focus:border-sky-400 focus:outline-none py-1.5 transition-colors"
               placeholder="Brief description..."
             />
           </div>
         ) : (
           <>
-            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-3">
+            <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-2">
               {doc.title}
             </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-5">
+            <p className="text-base text-zinc-600 dark:text-zinc-400 mb-4">
               {doc.description}
             </p>
           </>
@@ -159,14 +159,14 @@ export default function DocumentDetailPage() {
                     setDescription(doc.description);
                     setIsEditing(false);
                   }}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  className="px-3 py-1.5 rounded text-sm font-medium text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={!hasChanges}
-                  className="px-5 py-2 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-1.5 rounded text-sm font-medium bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Save
                 </button>
@@ -175,13 +175,13 @@ export default function DocumentDetailPage() {
               <>
                 <button
                   onClick={handleDelete}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors"
+                  className="px-3 py-1.5 rounded text-sm font-medium text-zinc-500 hover:text-red-500 hover:bg-red-500/10 transition-colors"
                 >
                   Delete
                 </button>
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="px-5 py-2 rounded-xl text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all btn-press"
+                  className="px-4 py-1.5 rounded text-sm font-medium bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-white transition-colors"
                 >
                   Edit
                 </button>
@@ -193,18 +193,17 @@ export default function DocumentDetailPage() {
 
       {/* External Link */}
       {doc.url && (
-        <div className="mb-8">
+        <div className="mb-6">
           <a
             href={doc.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium px-5 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all group"
+            className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-            View External Document
-            <span className="transition-transform group-hover:translate-x-0.5">→</span>
+            View External →
           </a>
         </div>
       )}
