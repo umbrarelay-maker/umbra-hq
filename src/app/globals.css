@@ -379,6 +379,56 @@ body {
   font-size: 1.25rem;
 }
 
+/* Tables */
+.ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+  border: 1px solid #e4e4e7;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.dark .ProseMirror th,
+.dark .ProseMirror td {
+  border-color: #27272a;
+}
+
+.ProseMirror th {
+  background: #f4f4f5;
+  font-weight: 600;
+  color: #18181b;
+}
+
+.dark .ProseMirror th {
+  background: #1f1f23;
+  color: #fafafa;
+}
+
+.ProseMirror td {
+  background: #fff;
+}
+
+.dark .ProseMirror td {
+  background: #09090b;
+}
+
+.ProseMirror tr:hover td {
+  background: #fafafa;
+}
+
+.dark .ProseMirror tr:hover td {
+  background: #18181b;
+}
+
 /* ==================== UTILITIES ==================== */
 
 .line-clamp-2 {

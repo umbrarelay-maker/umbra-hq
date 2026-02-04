@@ -4,6 +4,10 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
+import Table from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
+import TableHeader from '@tiptap/extension-table-header';
+import TableCell from '@tiptap/extension-table-cell';
 import { useEffect } from 'react';
 
 interface RichTextEditorProps {
@@ -174,6 +178,15 @@ export default function RichTextEditor({
       Highlight.configure({
         multicolor: false,
       }),
+      Table.configure({
+        resizable: false,
+        HTMLAttributes: {
+          class: 'border-collapse w-full',
+        },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     content,
     editable,
