@@ -63,6 +63,64 @@ export default function DocumentDetailPage() {
     }
   };
 
+  const handleExport = () => {
+    // Create a printable version
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>${title}</title>
+          <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { 
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+              line-height: 1.6;
+              color: #18181b;
+              padding: 40px;
+              max-width: 800px;
+              margin: 0 auto;
+            }
+            h1 { font-size: 28px; margin-bottom: 8px; font-weight: 600; }
+            .description { color: #71717a; margin-bottom: 24px; font-size: 16px; }
+            .meta { color: #a1a1aa; font-size: 12px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #e4e4e7; }
+            h2 { font-size: 22px; margin: 32px 0 16px; font-weight: 600; }
+            h3 { font-size: 18px; margin: 24px 0 12px; font-weight: 600; }
+            p { margin-bottom: 16px; }
+            ul, ol { margin-bottom: 16px; padding-left: 24px; }
+            li { margin-bottom: 8px; }
+            code { background: #f4f4f5; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+            pre { background: #18181b; color: #e4e4e7; padding: 16px; border-radius: 8px; margin: 16px 0; overflow-x: auto; }
+            pre code { background: none; padding: 0; }
+            table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+            th, td { border: 1px solid #e4e4e7; padding: 10px 12px; text-align: left; }
+            th { background: #f4f4f5; font-weight: 600; }
+            blockquote { border-left: 4px solid #e4e4e7; padding-left: 16px; margin: 16px 0; color: #71717a; font-style: italic; }
+            hr { border: none; border-top: 1px solid #e4e4e7; margin: 24px 0; }
+            @media print {
+              body { padding: 20px; }
+              pre { white-space: pre-wrap; }
+            }
+          </style>
+        </head>
+        <body>
+          <h1>${title}</h1>
+          <p class="description">${description}</p>
+          <p class="meta">Exported from Umbra HQ • ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+          ${content}
+        </body>
+      </html>
+    `;
+    
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      setTimeout(() => {
+        printWindow.print();
+      }, 250);
+    }
+  };
+
   if (!doc) {
     return (
       <div className="max-w-4xl animate-fade-in">
@@ -182,6 +240,15 @@ export default function DocumentDetailPage() {
                   className="px-3 py-1.5 rounded text-sm font-medium text-zinc-500 hover:text-red-500 hover:bg-red-500/10 transition-colors"
                 >
                   Delete
+                </button>
+                <button
+                  onClick={handleExport}
+                  className="px-3 py-1.5 rounded text-sm font-medium text-zinc-500 hover:text-sky-500 hover:bg-sky-500/10 transition-colors flex items-center gap-1.5"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Export
                 </button>
                 <button
                   onClick={() => setIsEditing(true)}
