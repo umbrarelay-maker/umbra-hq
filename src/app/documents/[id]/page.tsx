@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useData } from '@/context/DataContext';
 import Link from 'next/link';
 import RichTextEditor from '@/components/RichTextEditor';
+import { markdownToHtml, isMarkdown } from '@/lib/markdown';
 
 const categoryStyles = {
   audits: { bg: 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400', icon: '◈' },
@@ -28,7 +29,10 @@ export default function DocumentDetailPage() {
 
   useEffect(() => {
     if (doc) {
-      setContent(doc.content || '');
+      // Convert markdown to HTML if needed
+      const rawContent = doc.content || '';
+      const htmlContent = isMarkdown(rawContent) ? markdownToHtml(rawContent) : rawContent;
+      setContent(htmlContent);
       setTitle(doc.title);
       setDescription(doc.description);
     }
