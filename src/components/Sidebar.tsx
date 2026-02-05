@@ -13,6 +13,7 @@ const navItems = [
   { href: '/tasks', label: 'Tasks', icon: '☰', description: 'Kanban board' },
   { href: '/documents', label: 'Documents', icon: '◫', description: 'Notes & docs' },
   { href: '/links', label: 'Links', icon: '↗', description: 'Quick access' },
+  { href: '/trading', label: 'Trading', icon: '◇', description: 'Paper portfolio' },
   { href: '/updates', label: 'Updates', icon: '●', description: 'Activity feed' },
 ];
 
