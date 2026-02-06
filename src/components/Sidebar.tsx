@@ -14,6 +14,7 @@ const navItems = [
   { href: '/documents', label: 'Documents', icon: '◫', description: 'Notes & docs' },
   { href: '/links', label: 'Links', icon: '↗', description: 'Quick access' },
   { href: '/trading', label: 'Trading', icon: '◇', description: 'Paper portfolio' },
+  { href: '/umbratools', label: 'UmbraTools', icon: '⚡', description: 'SEO experiment' },
   { href: '/updates', label: 'Updates', icon: '●', description: 'Activity feed' },
 ];
 
