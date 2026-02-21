@@ -5,11 +5,11 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY!;
 
 export async function POST(request: Request) {
-  // Simple bearer auth using the service key (server-side only)
+  // Simple bearer auth using a dedicated token (server-side only)
   const authHeader = request.headers.get('authorization');
-  const expectedKey = process.env.SUPABASE_SERVICE_KEY;
+  const expectedKey = process.env.HQ_UPDATES_TOKEN;
 
-  if (!authHeader || authHeader !== `Bearer ${expectedKey}`) {
+  if (!expectedKey || !authHeader || authHeader !== `Bearer ${expectedKey}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
