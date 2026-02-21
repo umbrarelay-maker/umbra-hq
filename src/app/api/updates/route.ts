@@ -7,9 +7,9 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY!;
 export async function POST(request: Request) {
   // Simple bearer auth using a dedicated token (server-side only)
   const authHeader = request.headers.get('authorization');
-  const expectedKey = process.env.HQ_UPDATES_TOKEN;
+  const expectedKey = process.env.HQ_UPDATES_TOKEN?.trim();
 
-  if (!expectedKey || !authHeader || authHeader !== `Bearer ${expectedKey}`) {
+  if (!expectedKey || !authHeader || authHeader.trim() !== `Bearer ${expectedKey}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -51,7 +51,6 @@ export async function GET() {
   return NextResponse.json({
     hasServiceKey: Boolean(process.env.SUPABASE_SERVICE_KEY),
     hasUpdatesToken: Boolean(process.env.HQ_UPDATES_TOKEN),
-    updatesTokenLen: process.env.HQ_UPDATES_TOKEN ? process.env.HQ_UPDATES_TOKEN.length : 0,
     message: 'POST {content,type} with Authorization: Bearer $HQ_UPDATES_TOKEN to create an update'
   });
 }
