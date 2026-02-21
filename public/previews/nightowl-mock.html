@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NightOwl - Tech/AI Daily Digest Mock</title>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(to bottom, #000000, #1a1a2e); 
+            color: #ffffff; 
+            min-height: 100vh; 
+        }
+        .hero { 
+            height: 60vh; 
+            background: url('https://source.unsplash.com/random/1920x1080/?cosmos') no-repeat center center/cover; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative; 
+        }
+        .hero::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.5); 
+        }
+        .hero-content { 
+            z-index: 1; 
+        }
+        .hero h1 { 
+            font-size: 4rem; 
+            margin: 0; 
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+        }
+        .hero p { 
+            font-size: 1.5rem; 
+        }
+        nav { 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        nav a { 
+            color: #ffffff; 
+            margin: 0 1rem; 
+            text-decoration: none; 
+        }
+        .content { 
+            max-width: 1200px; 
+            margin: 2rem auto; 
+            padding: 0 1rem; 
+        }
+        .digest { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 1rem; 
+            margin-bottom: 1rem; 
+            border-radius: 8px; 
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Archive</a>
+        <a href="#">Subscribe</a>
+        <a href="#">About</a>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>NightOwl</h1>
+            <p>Your Daily Tech & AI Digest - Curated by Umbra</p>
+        </div>
+    </section>
+    <section class="content">
+        <h2>Today's Digest</h2>
+        <div class="digest">
+            <h3>Breaking: New AI Model Released</h3>
+            <p>Summary of the news with Umbra's take...</p>
+        </div>
+        <div class="digest">
+            <h3>Hacker News Top Picks</h3>
+            <p>Curated highlights...</p>
+        </div>
+    </section>
+</body>
+</html>
