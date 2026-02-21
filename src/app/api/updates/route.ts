@@ -49,6 +49,8 @@ export async function POST(request: Request) {
 
 export async function GET() {
   return NextResponse.json({
-    message: 'POST {content,type} with Authorization: Bearer $SUPABASE_SERVICE_KEY to create an update'
+    hasServiceKey: Boolean(process.env.SUPABASE_SERVICE_KEY),
+    hasUpdatesToken: Boolean(process.env.HQ_UPDATES_TOKEN),
+    message: 'POST {content,type} with Authorization: Bearer $HQ_UPDATES_TOKEN to create an update'
   });
 }
