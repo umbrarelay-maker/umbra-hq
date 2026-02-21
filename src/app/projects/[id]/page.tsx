@@ -6,7 +6,12 @@ import { useData } from '@/context/DataContext';
 import Link from 'next/link';
 import RichTextEditor from '@/components/RichTextEditor';
 
-const statusStyles = {
+const statusStyles: Record<string, { bg: string; dot: string; label: string }> = {
+  planning: {
+    bg: 'bg-zinc-500/10 text-zinc-600 dark:text-zinc-400',
+    dot: 'bg-zinc-500',
+    label: 'Planning'
+  },
   active: { 
     bg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', 
     dot: 'bg-emerald-500',
