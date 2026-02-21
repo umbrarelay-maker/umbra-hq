@@ -51,6 +51,7 @@ export async function GET() {
   return NextResponse.json({
     hasServiceKey: Boolean(process.env.SUPABASE_SERVICE_KEY),
     hasUpdatesToken: Boolean(process.env.HQ_UPDATES_TOKEN),
+    updatesTokenLen: process.env.HQ_UPDATES_TOKEN ? process.env.HQ_UPDATES_TOKEN.length : 0,
     message: 'POST {content,type} with Authorization: Bearer $HQ_UPDATES_TOKEN to create an update'
   });
 }
