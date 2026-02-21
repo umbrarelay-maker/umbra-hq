@@ -9,6 +9,11 @@ interface ProjectCardProps {
 }
 
 const statusStyles: Record<Project['status'], { bg: string; dot: string; label: string }> = {
+  planning: {
+    bg: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400',
+    dot: 'bg-zinc-500',
+    label: 'Planning'
+  },
   active: { 
     bg: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400', 
     dot: 'bg-emerald-500',
