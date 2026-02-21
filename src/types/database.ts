@@ -15,7 +15,7 @@ export interface Database {
           user_id: string;
           name: string;
           description: string;
-          status: 'active' | 'completed' | 'on-hold';
+          status: 'planning' | 'active' | 'completed' | 'on-hold';
           github_url: string | null;
           vercel_url: string | null;
           notes: string;
@@ -28,7 +28,7 @@ export interface Database {
           user_id: string;
           name: string;
           description: string;
-          status: 'active' | 'completed' | 'on-hold';
+          status: 'planning' | 'active' | 'completed' | 'on-hold';
           github_url?: string | null;
           vercel_url?: string | null;
           notes?: string;
@@ -41,7 +41,7 @@ export interface Database {
           user_id?: string;
           name?: string;
           description?: string;
-          status?: 'active' | 'completed' | 'on-hold';
+          status?: 'planning' | 'active' | 'completed' | 'on-hold';
           github_url?: string | null;
           vercel_url?: string | null;
           notes?: string;

@@ -11,6 +11,7 @@ import BlockersPanel from '@/components/BlockersPanel';
 export default function Dashboard() {
   const { projects, documents, updates, quickLinks, blockers, briefing } = useData();
   
+  const planningProjects = projects.filter(p => p.status === 'planning').length;
   const activeProjects = projects.filter(p => p.status === 'active').length;
   const completedProjects = projects.filter(p => p.status === 'completed').length;
   const activeBlockers = blockers.filter(b => !b.resolved).length;
@@ -50,8 +51,8 @@ export default function Dashboard() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
+        <StatsCard label="Planning" value={planningProjects} icon="◎" />
         <StatsCard label="Active Projects" value={activeProjects} icon="◈" accent />
-        <StatsCard label="Completed" value={completedProjects} icon="✓" />
         <StatsCard label="Documents" value={documents.length} icon="◇" />
         <StatsCard label="Updates" value={updates.length} icon="◆" />
       </div>

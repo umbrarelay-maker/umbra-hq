@@ -76,6 +76,7 @@ function NewProjectModal({ onClose, onSave }: NewProjectModalProps) {
                 onChange={e => setStatus(e.target.value as Project['status'])}
                 className="w-full px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
               >
+                <option value="planning">Planning</option>
                 <option value="active">Active</option>
                 <option value="on-hold">On Hold</option>
                 <option value="completed">Completed</option>
@@ -151,6 +152,7 @@ export default function ProjectsPage() {
 
   const statusCounts = {
     all: projects.length,
+    planning: projects.filter(p => p.status === 'planning').length,
     active: projects.filter(p => p.status === 'active').length,
     completed: projects.filter(p => p.status === 'completed').length,
     'on-hold': projects.filter(p => p.status === 'on-hold').length,
@@ -177,7 +179,7 @@ export default function ProjectsPage() {
 
       {/* Filters */}
       <div className="flex flex-wrap gap-2 mb-8">
-        {(['all', 'active', 'completed', 'on-hold'] as const).map((status, index) => (
+        {(['all', 'planning', 'active', 'completed', 'on-hold'] as const).map((status, index) => (
           <button
             key={status}
             onClick={() => setFilter(status)}
@@ -188,7 +190,13 @@ export default function ProjectsPage() {
             }`}
             style={{ animationDelay: `${index * 0.05}s` }}
           >
-            {status === 'all' ? 'All' : status === 'on-hold' ? 'On Hold' : status.charAt(0).toUpperCase() + status.slice(1)}
+            {status === 'all'
+              ? 'All'
+              : status === 'planning'
+              ? 'Planning'
+              : status === 'on-hold'
+              ? 'On Hold'
+              : status.charAt(0).toUpperCase() + status.slice(1)}
             <span className={`ml-2 ${filter === status ? 'opacity-60' : 'opacity-40'}`}>
               {statusCounts[status]}
             </span>

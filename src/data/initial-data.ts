@@ -5,7 +5,7 @@ export interface Project {
   id: string;
   name: string;
   description: string;
-  status: 'active' | 'completed' | 'on-hold';
+  status: 'planning' | 'active' | 'completed' | 'on-hold';
   githubUrl?: string;
   vercelUrl?: string;
   notes: string;

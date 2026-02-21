@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS projects (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   description TEXT NOT NULL,
-  status TEXT NOT NULL CHECK (status IN ('active', 'completed', 'on-hold')),
+  status TEXT NOT NULL CHECK (status IN ('planning', 'active', 'completed', 'on-hold')),
   github_url TEXT,
   vercel_url TEXT,
   notes TEXT NOT NULL DEFAULT '',
