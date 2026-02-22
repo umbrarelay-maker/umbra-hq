@@ -17,6 +17,9 @@ const navItems = [
   { href: '/umbratools', label: 'UmbraTools', icon: '⚡', description: 'SEO experiment' },
   { href: '/analytics', label: 'Analytics', icon: '◉', description: 'Traffic stats' },
   { href: '/updates', label: 'Updates', icon: '●', description: 'Activity feed' },
+  { href: '/decisions', label: 'Decisions', icon: '◆', description: 'What we decided' },
+  { href: '/states', label: 'States', icon: '📌', description: 'Project snapshots' },
+  { href: '/lessons', label: 'Lessons', icon: '◇', description: 'Playbook' },
 ];
 
 export default function Sidebar() {
