@@ -10,11 +10,15 @@ import BlockersPanel from '@/components/BlockersPanel';
 
 export default function Dashboard() {
   const { projects, documents, updates, quickLinks, blockers, briefing } = useData();
-  
+
   const planningProjects = projects.filter(p => p.status === 'planning').length;
   const activeProjects = projects.filter(p => p.status === 'active').length;
   const completedProjects = projects.filter(p => p.status === 'completed').length;
   const activeBlockers = blockers.filter(b => !b.resolved).length;
+
+  const decisionsCount = updates.filter(u => u.content.trim().startsWith('[DECISION]')).length;
+  const lessonsCount = updates.filter(u => u.content.trim().startsWith('[LESSON]')).length;
+  const statesCount = documents.filter(d => (d.title || '').toUpperCase().startsWith('STATE:')).length;
 
   return (
     <div className="max-w-6xl space-y-8">
@@ -55,6 +59,42 @@ export default function Dashboard() {
         <StatsCard label="Active Projects" value={activeProjects} icon="◈" accent />
         <StatsCard label="Documents" value={documents.length} icon="◇" />
         <StatsCard label="Updates" value={updates.length} icon="◆" />
+      </div>
+
+      {/* Memory widgets */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="/decisions" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500">Decisions</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-white mt-1">{decisionsCount}</p>
+            </div>
+            <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">◆</div>
+          </div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">What we decided + why.</p>
+        </a>
+
+        <a href="/states" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500">Project States</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-white mt-1">{statesCount}</p>
+            </div>
+            <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">📌</div>
+          </div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">Canonical snapshots.</p>
+        </a>
+
+        <a href="/lessons" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500">Lessons</p>
+              <p className="text-2xl font-semibold text-zinc-900 dark:text-white mt-1">{lessonsCount}</p>
+            </div>
+            <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">◇</div>
+          </div>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">The playbook.</p>
+        </a>
       </div>
 
       {/* Main Content */}

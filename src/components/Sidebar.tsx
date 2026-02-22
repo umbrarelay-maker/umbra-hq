@@ -22,13 +22,19 @@ const navItems = [
   { href: '/lessons', label: 'Lessons', icon: '◇', description: 'Playbook' },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({
+  collapsed,
+  onCollapsedChange,
+}: {
+  collapsed: boolean;
+  onCollapsedChange: (v: boolean) => void;
+}) {
   const pathname = usePathname();
   const { darkMode, toggleDarkMode, projects, tasks, updates } = useData();
   const { user, signOut } = useAuth();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  // collapsed state lifted into AppShell so main content can reflow
   const [mobileOpen, setMobileOpen] = useState(false);
   
   const activeProjects = projects.filter(p => p.status === 'active').length;
@@ -39,7 +45,7 @@ export default function Sidebar() {
     // Auto-collapse on mobile
     const checkMobile = () => {
       if (window.innerWidth < 768) {
-        setCollapsed(true);
+        onCollapsedChange(true);
       }
     };
     checkMobile();
@@ -116,7 +122,7 @@ export default function Sidebar() {
             )}
           </div>
           <button
-            onClick={() => { setCollapsed(!collapsed); setMobileOpen(false); }}
+            onClick={() => { onCollapsedChange(!collapsed); setMobileOpen(false); }}
             className="hidden md:flex w-7 h-7 rounded-md items-center justify-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
