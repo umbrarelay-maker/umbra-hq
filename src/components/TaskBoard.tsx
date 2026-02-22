@@ -6,10 +6,27 @@ import { Task } from '@/data/initial-data';
 import { useData } from '@/context/DataContext';
 
 const columns = [
+  { id: 'recurring', title: 'Recurring', icon: '↻', color: 'sky' },
   { id: 'todo', title: 'To Do', icon: '○', color: 'zinc' },
   { id: 'in-progress', title: 'In Progress', icon: '◐', color: 'amber' },
   { id: 'done', title: 'Done', icon: '●', color: 'emerald' },
 ] as const;
+
+function isRecurring(task: Task) {
+  return task.title.trim().startsWith('↻') || task.title.trim().toLowerCase().startsWith('[recurring]');
+}
+
+function stripRecurringPrefix(title: string) {
+  return title.replace(/^\s*(↻\s*|\[recurring\]\s*)/i, '');
+}
+
+function ensureRecurringPrefix(title: string) {
+  const t = title.trim();
+  if (t.startsWith('↻')) return t;
+  if (/^\[recurring\]/i.test(t)) return `↻ ${stripRecurringPrefix(t)}`.trim();
+  return `↻ ${t}`.trim();
+}
+
 
 const priorityStyles = {
   high: { border: 'border-l-red-500', bg: 'bg-red-500/5', text: 'text-red-500', label: 'High' },
@@ -102,6 +119,9 @@ function TaskModal({ task, onClose, onSave, onDelete }: TaskModalProps) {
                 <option value="in-progress">In Progress</option>
                 <option value="done">Done</option>
               </select>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-2">
+                Tip: prefix a title with <span className="font-mono">↻</span> to mark it recurring.
+              </p>
             </div>
           </div>
           <div>
@@ -211,8 +231,29 @@ export default function TaskBoard() {
 
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
+
     const taskId = result.draggableId;
-    const newStatus = result.destination.droppableId as Task['status'];
+    const dest = result.destination.droppableId;
+
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task) return;
+
+    // Special column: Recurring is a tag/prefix, not a DB status.
+    if (dest === 'recurring') {
+      if (!isRecurring(task)) {
+        updateTask(taskId, { title: ensureRecurringPrefix(task.title) });
+      }
+      // Keep status as todo so DB schema stays unchanged.
+      if (task.status !== 'todo') moveTask(taskId, 'todo');
+      return;
+    }
+
+    // Dragging out of recurring: remove prefix
+    if (dest !== 'recurring' && isRecurring(task) && result.source.droppableId === 'recurring') {
+      updateTask(taskId, { title: stripRecurringPrefix(task.title) });
+    }
+
+    const newStatus = dest as Task['status'];
     moveTask(taskId, newStatus);
   };
 
@@ -253,9 +294,12 @@ export default function TaskBoard() {
       </div>
 
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {columns.map((column, columnIndex) => {
-            const columnTasks = tasks.filter(t => t.status === column.id);
+            const columnTasks =
+              column.id === 'recurring'
+                ? tasks.filter((t) => isRecurring(t))
+                : tasks.filter((t) => !isRecurring(t) && t.status === column.id);
             return (
               <div 
                 key={column.id} 
@@ -268,6 +312,8 @@ export default function TaskBoard() {
                       ? 'bg-emerald-500/10 text-emerald-500' 
                       : column.id === 'in-progress'
                       ? 'bg-amber-500/10 text-amber-500'
+                      : column.id === 'recurring'
+                      ? 'bg-sky-500/10 text-sky-500'
                       : 'bg-zinc-500/10 text-zinc-500'
                   }`}>
                     {column.icon}
