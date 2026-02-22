@@ -7,19 +7,40 @@ import { useData } from '@/context/DataContext';
 import { useAuth } from '@/context/AuthContext';
 import SearchModal from './SearchModal';
 
-const navItems = [
-  { href: '/', label: 'Dashboard', icon: '⊞', description: 'Overview' },
-  { href: '/projects', label: 'Projects', icon: '⬡', description: 'Track work' },
-  { href: '/tasks', label: 'Tasks', icon: '☰', description: 'Kanban board' },
-  { href: '/documents', label: 'Documents', icon: '◫', description: 'Notes & docs' },
-  { href: '/links', label: 'Links', icon: '↗', description: 'Quick access' },
-  { href: '/trading', label: 'Trading', icon: '◇', description: 'Paper portfolio' },
-  { href: '/umbratools', label: 'UmbraTools', icon: '⚡', description: 'SEO experiment' },
-  { href: '/analytics', label: 'Analytics', icon: '◉', description: 'Traffic stats' },
-  { href: '/updates', label: 'Updates', icon: '●', description: 'Activity feed' },
-  { href: '/decisions', label: 'Decisions', icon: '◆', description: 'What we decided' },
-  { href: '/states', label: 'States', icon: '📌', description: 'Project snapshots' },
-  { href: '/lessons', label: 'Lessons', icon: '◇', description: 'Playbook' },
+type NavItem =
+  | { kind: 'link'; href: string; label: string; icon: string; description: string }
+  | { kind: 'group'; href: string; label: string; icon: string; description: string; children: Array<{ href: string; label: string }> };
+
+const navItems: NavItem[] = [
+  { kind: 'link', href: '/', label: 'Dashboard', icon: '⊞', description: 'Overview' },
+  { kind: 'link', href: '/projects', label: 'Projects', icon: '⬡', description: 'Track work' },
+  { kind: 'link', href: '/tasks', label: 'Tasks', icon: '☰', description: 'Kanban board' },
+  {
+    kind: 'group',
+    href: '/links',
+    label: 'Links',
+    icon: '↗',
+    description: 'Quick access',
+    children: [
+      { href: '/links', label: 'Links' },
+      { href: '/documents', label: 'Documents' },
+    ],
+  },
+  { kind: 'link', href: '/trading', label: 'Trading', icon: '◇', description: 'Paper portfolio' },
+  {
+    kind: 'group',
+    href: '/umbratools',
+    label: 'UmbraTools',
+    icon: '⚡',
+    description: 'SEO experiment',
+    children: [
+      { href: '/umbratools', label: 'Overview' },
+      { href: '/analytics', label: 'Analytics' },
+    ],
+  },
+  { kind: 'link', href: '/decisions', label: 'Decisions', icon: '◆', description: 'What we decided' },
+  { kind: 'link', href: '/lessons', label: 'Lessons', icon: '◇', description: 'Playbook' },
+  { kind: 'link', href: '/updates', label: 'Updates', icon: '●', description: 'Activity feed' },
 ];
 
 export default function Sidebar({
@@ -170,56 +191,65 @@ export default function Sidebar({
           <div className="space-y-0.5 stagger-children">
             {navItems.map((item, index) => {
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+
+              const baseClass = `group flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-colors duration-150 relative ${
+                isActive
+                  ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white'
+              } ${!showLabels ? 'justify-center px-0' : ''}`;
+
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`group flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-colors duration-150 relative ${
-                    isActive
-                      ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white'
-                  } ${!showLabels ? 'justify-center px-0' : ''}`}
-                  style={{ animationDelay: `${index * 0.03}s` }}
-                  title={!showLabels ? item.label : undefined}
-                >
-                  <span className="text-base opacity-70">
-                    {item.icon}
-                  </span>
-                  {showLabels && (
-                    <>
-                      <div className="flex-1 min-w-0">
-                        <span className="font-medium">{item.label}</span>
-                      </div>
-                      {item.label === 'Projects' && activeProjects > 0 && (
-                        <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded transition-colors ${
-                          isActive 
-                            ? 'bg-white/20 dark:bg-zinc-900/20' 
-                            : 'bg-sky-100 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400'
-                        }`}>
-                          {activeProjects}
-                        </span>
-                      )}
-                      {item.label === 'Tasks' && activeTasks > 0 && (
-                        <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded transition-colors ${
-                          isActive 
-                            ? 'bg-white/20 dark:bg-zinc-900/20' 
-                            : 'bg-pink-100 dark:bg-pink-500/15 text-pink-600 dark:text-pink-400'
-                        }`}>
-                          {activeTasks}
-                        </span>
-                      )}
-                      {item.label === 'Updates' && updates.length > 0 && (
-                        <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded transition-colors ${
-                          isActive 
-                            ? 'bg-white/20 dark:bg-zinc-900/20' 
-                            : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
-                        }`}>
-                          {updates.length}
-                        </span>
-                      )}
-                    </>
+                <div key={item.href} style={{ animationDelay: `${index * 0.03}s` }}>
+                  <Link href={item.href} className={baseClass} title={!showLabels ? item.label : undefined}>
+                    <span className="text-base opacity-70">{item.icon}</span>
+                    {showLabels && (
+                      <>
+                        <div className="flex-1 min-w-0">
+                          <span className="font-medium">{item.label}</span>
+                        </div>
+                        {item.label === 'Projects' && activeProjects > 0 && (
+                          <span
+                            className={`text-[10px] font-medium px-1.5 py-0.5 rounded transition-colors ${
+                              isActive ? 'bg-white/20 dark:bg-zinc-900/20' : 'bg-sky-100 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400'
+                            }`}
+                          >
+                            {activeProjects}
+                          </span>
+                        )}
+                        {item.label === 'Tasks' && activeTasks > 0 && (
+                          <span
+                            className={`text-[10px] font-medium px-1.5 py-0.5 rounded transition-colors ${
+                              isActive ? 'bg-white/20 dark:bg-zinc-900/20' : 'bg-pink-100 dark:bg-pink-500/15 text-pink-600 dark:text-pink-400'
+                            }`}
+                          >
+                            {activeTasks}
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </Link>
+
+                  {showLabels && item.kind === 'group' && (
+                    <div className="ml-10 mt-1 mb-2 space-y-1">
+                      {item.children.map((c) => {
+                        const childActive = pathname === c.href || (c.href !== '/' && pathname.startsWith(c.href));
+                        return (
+                          <Link
+                            key={c.href}
+                            href={c.href}
+                            className={`block text-xs px-3 py-2 rounded-md transition-colors ${
+                              childActive
+                                ? 'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white'
+                                : 'text-zinc-500 dark:text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-white'
+                            }`}
+                          >
+                            {c.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   )}
-                </Link>
+                </div>
               );
             })}
           </div>
