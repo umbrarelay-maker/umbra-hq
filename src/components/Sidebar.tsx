@@ -38,8 +38,7 @@ const navItems: NavItem[] = [
       { href: '/analytics', label: 'Analytics' },
     ],
   },
-  { kind: 'link', href: '/decisions', label: 'Decisions', icon: '◆', description: 'What we decided' },
-  { kind: 'link', href: '/lessons', label: 'Lessons', icon: '◇', description: 'Playbook' },
+  { kind: 'link', href: '/playbook', label: 'Playbook', icon: '◇', description: 'Decisions + lessons' },
   { kind: 'link', href: '/updates', label: 'Updates', icon: '●', description: 'Activity feed' },
 ];
 
