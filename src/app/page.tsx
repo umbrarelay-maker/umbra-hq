@@ -11,8 +11,17 @@ export default function Dashboard() {
 
   const activeProjects = projects.filter(p => p.status === 'active').length;
 
-  const decisionsCount = updates.filter(u => u.content.trim().startsWith('[DECISION]')).length;
-  const lessonsCount = updates.filter(u => u.content.trim().startsWith('[LESSON]')).length;
+  const isDecision = (c: string) => {
+    const t = c.trim();
+    return t.startsWith('[DECISION]') || t.startsWith('[DECISION][LESSON]') || t.startsWith('[LESSON][DECISION]');
+  };
+  const isLesson = (c: string) => {
+    const t = c.trim();
+    return t.startsWith('[LESSON]') || t.startsWith('[DECISION][LESSON]') || t.startsWith('[LESSON][DECISION]');
+  };
+
+  const decisionsCount = updates.filter(u => isDecision(u.content)).length;
+  const lessonsCount = updates.filter(u => isLesson(u.content)).length;
 
   return (
     <div className="max-w-6xl space-y-8">
@@ -54,7 +63,7 @@ export default function Dashboard() {
           <p className="text-2xl font-semibold text-zinc-900 dark:text-white mt-1">{activeProjects}</p>
         </div>
 
-        <a href="/decisions" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
+        <a href="/playbook" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500">Decisions</p>
@@ -62,10 +71,14 @@ export default function Dashboard() {
             </div>
             <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">◆</div>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{(updates.find(u => u.content.trim().startsWith('[DECISION]'))?.content ?? 'No decisions yet').replace('[DECISION]','').trim()}</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{(() => {
+            const u = updates.find(x => isDecision(x.content));
+            if (!u) return 'No decisions yet';
+            return u.content.replace('[DECISION][LESSON]','').replace('[LESSON][DECISION]','').replace('[DECISION]','').replace('[LESSON]','').trim();
+          })()}</p>
         </a>
 
-        <a href="/lessons" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
+        <a href="/playbook" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500 dark:text-zinc-500">Lessons</p>
@@ -73,7 +86,11 @@ export default function Dashboard() {
             </div>
             <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">◇</div>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{(updates.find(u => u.content.trim().startsWith('[LESSON]'))?.content ?? 'No lessons yet').replace('[LESSON]','').trim()}</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{(() => {
+            const u = updates.find(x => isLesson(x.content));
+            if (!u) return 'No lessons yet';
+            return u.content.replace('[DECISION][LESSON]','').replace('[LESSON][DECISION]','').replace('[DECISION]','').replace('[LESSON]','').trim();
+          })()}</p>
         </a>
       </div>
 

@@ -10,10 +10,21 @@ const filters = ['all', 'decisions', 'lessons'] as const;
 type Filter = (typeof filters)[number];
 
 function isDecision(u: Update) {
-  return u.content.trim().startsWith('[DECISION]');
+  const c = u.content.trim();
+  return c.startsWith('[DECISION]') || c.startsWith('[DECISION][LESSON]') || c.startsWith('[LESSON][DECISION]');
 }
 function isLesson(u: Update) {
-  return u.content.trim().startsWith('[LESSON]');
+  const c = u.content.trim();
+  return c.startsWith('[LESSON]') || c.startsWith('[DECISION][LESSON]') || c.startsWith('[LESSON][DECISION]');
+}
+
+function stripTags(content: string) {
+  return content
+    .trim()
+    .replace(/^\[DECISION\]\s*/i, '')
+    .replace(/^\[LESSON\]\s*/i, '')
+    .replace(/^\[DECISION\]\[LESSON\]\s*/i, '')
+    .replace(/^\[LESSON\]\[DECISION\]\s*/i, '');
 }
 
 export default function PlaybookPage() {
@@ -44,7 +55,7 @@ export default function PlaybookPage() {
       <div className="mb-8">
         <AddUpdateForm />
         <p className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-2">
-          Prefix entries with <span className="font-mono">[DECISION]</span> or <span className="font-mono">[LESSON]</span>.
+          Prefix entries with <span className="font-mono">[DECISION]</span>, <span className="font-mono">[LESSON]</span>, or <span className="font-mono">[DECISION][LESSON]</span> when it is both.
         </p>
       </div>
 
