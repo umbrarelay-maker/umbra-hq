@@ -71,7 +71,7 @@ export default function Dashboard() {
             </div>
             <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">◆</div>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">What we decided + why.</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{(updates.find(u => u.content.trim().startsWith('[DECISION]'))?.content ?? 'No decisions yet').replace('[DECISION]','').trim()}</p>
         </a>
 
         <a href="/states" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
@@ -82,7 +82,7 @@ export default function Dashboard() {
             </div>
             <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">📌</div>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">Canonical snapshots.</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{documents.find(d => (d.title || '').toUpperCase().startsWith('STATE:'))?.title ?? 'No state snapshots yet'}</p>
         </a>
 
         <a href="/lessons" className="p-4 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-sky-300 dark:hover:border-sky-500/30 transition-colors">
@@ -93,7 +93,7 @@ export default function Dashboard() {
             </div>
             <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300">◇</div>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2">The playbook.</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 line-clamp-1">{(updates.find(u => u.content.trim().startsWith('[LESSON]'))?.content ?? 'No lessons yet').replace('[LESSON]','').trim()}</p>
         </a>
       </div>
 
