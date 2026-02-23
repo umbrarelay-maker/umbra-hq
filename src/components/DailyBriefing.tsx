@@ -38,12 +38,16 @@ const moodConfig = {
 };
 
 function formatDate(dateStr: string) {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    month: 'long', 
+  // `date` is stored as YYYY-MM-DD (no time). If we do `new Date(dateStr)`,
+  // browsers interpret it as UTC midnight, which can display as the previous
+  // day in US timezones. Parse it as a local date instead.
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, (m || 1) - 1, d || 1);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
     day: 'numeric',
-    year: 'numeric'
+    year: 'numeric',
   });
 }
 
