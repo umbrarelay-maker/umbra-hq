@@ -226,8 +226,6 @@ export default function TradingPage() {
                     <div className="flex items-center gap-2 mb-1">
                       <a 
                         href={position.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
                         className="text-sm font-medium text-zinc-900 dark:text-white hover:text-sky-500 dark:hover:text-sky-400 transition-colors truncate"
                       >
                         {position.market}

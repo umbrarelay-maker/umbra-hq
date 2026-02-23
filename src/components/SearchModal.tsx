@@ -261,8 +261,6 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       <a
                         key={link.id}
                         href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         onClick={onClose}
                         className="block px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-150 group"
                       >

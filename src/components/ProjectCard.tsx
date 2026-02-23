@@ -99,8 +99,6 @@ export default function ProjectCard({ project, compact }: ProjectCardProps) {
         {project.githubUrl && (
           <a
             href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-colors duration-150"
           >
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
@@ -112,8 +110,6 @@ export default function ProjectCard({ project, compact }: ProjectCardProps) {
         {project.vercelUrl && (
           <a
             href={project.vercelUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-colors duration-150"
           >
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">

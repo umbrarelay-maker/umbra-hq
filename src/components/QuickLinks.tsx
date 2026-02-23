@@ -36,8 +36,6 @@ export default function QuickLinks({ links }: QuickLinksProps) {
                 <a
                   key={link.id}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white transition-all duration-200"
                   style={{ animationDelay: `${index * 0.03}s` }}
                 >

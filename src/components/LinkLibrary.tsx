@@ -201,8 +201,6 @@ export default function LinkLibrary() {
                 <a
                   key={link.id}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group relative p-5 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-sky-500/30 dark:hover:border-sky-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-sky-500/5 dark:hover:shadow-sky-500/10 hover-lift"
                 >
                   {/* Gradient on hover */}

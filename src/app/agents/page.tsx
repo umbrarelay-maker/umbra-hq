@@ -50,8 +50,6 @@ export default function AgentsPage() {
                     <Link
                       href={a.charterUrl}
                       className="text-xs text-indigo-300 hover:text-indigo-200"
-                      target="_blank"
-                      rel="noreferrer"
                     >
                       Charter →
                     </Link>
@@ -116,8 +114,6 @@ export default function AgentsPage() {
               <Link
                 href="https://umbra-hq.vercel.app/documents/d64a499a-f678-4537-ab76-0cb8ae2729c6"
                 className="text-indigo-300 hover:text-indigo-200"
-                target="_blank"
-                rel="noreferrer"
               >
                 Sub-Agent Map (Mermaid) — v1
               </Link>

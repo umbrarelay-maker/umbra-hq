@@ -82,8 +82,6 @@ export default function DocumentCard({ document }: DocumentCardProps) {
         {document.url && (
           <a
             href={document.url}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-colors duration-150"
           >
             External ↗

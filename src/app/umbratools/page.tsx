@@ -103,8 +103,6 @@ export default function UmbraToolsPage() {
       <div className="flex flex-wrap gap-3 mb-8">
         <a
           href="https://umbratools.dev"
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-medium transition-colors"
         >
           <span>Visit Site</span>
@@ -112,24 +110,18 @@ export default function UmbraToolsPage() {
         </a>
         <a
           href="https://search.google.com/search-console"
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium transition-colors"
         >
           Search Console
         </a>
         <a
           href="https://analytics.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium transition-colors"
         >
           GA4 Analytics
         </a>
         <a
           href="https://github.com/umbrarelay-maker/umbratools"
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium transition-colors"
         >
           GitHub
@@ -144,8 +136,6 @@ export default function UmbraToolsPage() {
             <a
               key={tool.slug}
               href={`https://umbratools.dev/tools/${tool.slug}`}
-              target="_blank"
-              rel="noopener noreferrer"
               className="p-3 rounded-lg bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-violet-500/50 transition-colors group"
             >
               <div className="text-sm font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-violet-500 dark:group-hover:text-violet-400 transition-colors">

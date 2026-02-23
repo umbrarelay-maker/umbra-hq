@@ -221,8 +221,6 @@ export default function ProjectDetailPage() {
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all group"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -235,8 +233,6 @@ export default function ProjectDetailPage() {
             {project.vercelUrl && (
               <a
                 href={project.vercelUrl}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all group btn-press"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
