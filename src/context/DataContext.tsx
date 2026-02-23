@@ -185,8 +185,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   // Fetch all data from Supabase
   const fetchAllData = useCallback(async () => {
-    if (!useSupabase || !user) {
-      // If no user or not using Supabase, use initial data
+    if (!useSupabase) {
+      // If not using Supabase, use initial data
       setProjects(initialProjects);
       setDocuments(initialDocuments);
       setUpdates(initialUpdates);
