@@ -13,6 +13,7 @@ type NavItem =
 
 const navItems: NavItem[] = [
   { kind: 'link', href: '/', label: 'Dashboard', icon: '⊞', description: 'Overview' },
+  { kind: 'link', href: '/agents', label: 'Agents', icon: '⟡', description: 'Org chart + status' },
   { kind: 'link', href: '/projects', label: 'Projects', icon: '⬡', description: 'Track work' },
   { kind: 'link', href: '/tasks', label: 'Tasks', icon: '☰', description: 'Kanban board' },
   {
