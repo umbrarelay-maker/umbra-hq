@@ -27,26 +27,28 @@ export default function DocumentDetailPage() {
   const [description, setDescription] = useState(doc?.description || '');
   const [hasChanges, setHasChanges] = useState(false);
 
-  useEffect(() => {
-    if (doc) {
-      // Convert markdown to HTML if needed
-      const rawContent = doc.content || '';
-      const htmlContent = isMarkdown(rawContent) ? markdownToHtml(rawContent) : rawContent;
-      setContent(htmlContent);
-      setTitle(doc.title);
-      setDescription(doc.description);
-    }
-  }, [doc]);
+  const rawDocContent = doc?.content || '';
+  const renderedDocHtml = useMemo(() => {
+    if (!rawDocContent) return '';
+    return isMarkdown(rawDocContent) ? markdownToHtml(rawDocContent) : rawDocContent;
+  }, [rawDocContent]);
 
   useEffect(() => {
     if (doc) {
-      const changed = 
-        content !== (doc.content || '') || 
-        title !== doc.title || 
-        description !== doc.description;
+      // TipTap expects HTML; when doc content is markdown we convert it for editing.
+      setContent(renderedDocHtml);
+      setTitle(doc.title);
+      setDescription(doc.description);
+    }
+  }, [doc, renderedDocHtml]);
+
+  useEffect(() => {
+    if (doc) {
+      const base = isMarkdown(rawDocContent) ? renderedDocHtml : rawDocContent;
+      const changed = content !== base || title !== doc.title || description !== doc.description;
       setHasChanges(changed);
     }
-  }, [content, title, description, doc]);
+  }, [content, title, description, doc, rawDocContent, renderedDocHtml]);
 
   const handleSave = () => {
     if (doc) {
@@ -279,13 +281,24 @@ export default function DocumentDetailPage() {
         </div>
       )}
 
-      {/* Content Editor */}
-      <RichTextEditor
-        content={content}
-        onChange={setContent}
-        editable={isEditing}
-        placeholder="Start writing your document..."
-      />
+      {/* Content */}
+      {isEditing ? (
+        <RichTextEditor
+          content={content}
+          onChange={setContent}
+          editable
+          placeholder="Start writing your document..."
+        />
+      ) : (
+        <div
+          className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden"
+        >
+          <div
+            className="prose prose-zinc dark:prose-invert prose-sm max-w-none p-6"
+            dangerouslySetInnerHTML={{ __html: renderedDocHtml || '<p></p>' }}
+          />
+        </div>
+      )}
     </div>
   );
 }
