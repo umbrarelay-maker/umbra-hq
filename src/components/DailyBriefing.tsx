@@ -75,7 +75,7 @@ export default function DailyBriefing({ briefing }: DailyBriefingProps) {
       </div>
 
       {/* Summary */}
-      <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-6 max-w-3xl">
+      <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-6 max-w-3xl whitespace-pre-line">
         {briefing.summary}
       </p>
 
